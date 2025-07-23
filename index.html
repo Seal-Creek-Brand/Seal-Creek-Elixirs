@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seal Creek Elixirs - Open Range Mist™</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #d4c4a8;
+            --bg-secondary: #e8dcc8;
+            --text-primary: #2c2c2c;
+            --accent-turquoise: #5eb8b8;
+            --border-color: #3a3a3a;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: var(--bg-primary) !important;
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--bg-primary) !important;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            padding-left: 0;
+            background-color: var(--bg-secondary) !important;
+            border: 3px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 30px;
+            position: relative;
+        
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+}
+
+        .shake-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            background-color: var(--accent-turquoise) !important;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-weight: normal;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-style: italic;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .volume {
+            font-size: 1.1em;
+        }
+
+        .mission {
+            background-color: var(--bg-secondary) !important;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-style: italic;
+            border: 2px solid var(--border-color);
+        }
+
+        .accordion {
+            margin-bottom: 15px;
+        }
+
+        .accordion-header {
+            background-color: var(--bg-secondary) !important;
+            padding: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-header:hover {
+            background-color: #ddd0b8 !important;
+        }
+
+        .accordion-header h2 {
+            font-size: 1.4em;
+            font-weight: normal;
+        }
+
+        .accordion-icon {
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 25px;
+            background-color: white !important;
+            border: 2px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            margin-top: -2px;
+        }
+
+        .accordion.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion.active .accordion-content {
+            display: block;
+        }
+
+        .ingredient-box {
+            background-color: var(--bg-secondary) !important;
+            border: 2px solid var(--border-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box {
+            background-color: #f8f4e8 !important;
+            border: 2px solid #8b6914;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .oil-info {
+            background-color: #f5f0e8 !important;
+            border-left: 4px solid var(--accent-turquoise);
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .contact-info {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            header {
+                padding-left: 20px;
+                padding-top: 100px;
+            }
+            
+            .shake-badge {
+                width: 60px;
+                height: 60px;
+                font-size: 11px;
+                top: 15px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .accordion-header h2 {
+                font-size: 1.2em;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+
+        .cosmetic-notice {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header><h1>Open Range Mist™</h1>
+            <p class="subtitle">Outdoor Aromatic Body Spray</p>
+            <p class="volume">2 fl oz / 60 mL</p>
+        </header>
+
+        <div class="mission">
+            <p><strong>Mission Statement:</strong> Crafting beautifully scented products that people love for a more enjoyable and human outdoor experience.</p>
+        </div>
+
+        <p class="cosmetic-notice">*For cosmetic use only. Not intended as insect repellent.*</p>
+
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <h2>Product Overview</h2>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <p>Open Range Mist™ is a cosmetic fragrance designed to leave clothing and skin pleasantly scented during outdoor adventures. This small-batch, nature-inspired formula combines the calming essence of lavender with warm spicy notes and fresh citric-camphor undertones.</p>
+                
+                <p><strong>Key Features:</strong></p>
+                <ul>
+                    <li>Eco-minded packaging with recyclable components</li>
+                    <li>No synthetic fragrances, parabens, or phthalates</li>
+                    <li>Hand-crafted in Denton, Texas</li>
+                    <li>12+ month shelf life when stored properly</li>
+                    <li>Fine mist sprayer for even application</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <h2>Ingredients (INCI)</h2>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <div class="ingredient-box">
+                    <p><strong>Full INCI List:</strong></p>
+                    <p>Aqua (Water), Alcohol Denat., Lavandula angustifolia (Lavender) Oil, Syzygium aromaticum (Clove) Bud Oil, Corymbia citriodora Oil, Potassium Oleate (Soap Base), Fragrance (Parfum).</p>
+                    <p style="margin-top: 10px;"><em>Optional additives may include: Glycerin, Polysorbate-20, Citric Acid</em></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <h2>Essential Oil Information</h2>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <div class="oil-info">
+                    <h3>Lavender (Lavandula angustifolia)</h3>
+                    <p>The cornerstone of this blend, lavender has been treasured for millennia. Ancient Romans used it in their baths (the name comes from Latin 'lavare' - to wash), while medieval Europeans scattered it on floors to freshen rooms. Today, lavender remains one of the most beloved essential oils worldwide.</p>
+                    <p><strong>Interesting Facts:</strong></p>
+                    <ul>
+                        <li>Queen Victoria was known to demand fresh lavender in all royal residences</li>
+                        <li>During WWI, lavender oil was used in field hospitals</li>
+                        <li>It takes approximately 3 pounds of lavender flowers to produce just 15mL of essential oil</li>
+                        <li>The finest lavender grows at altitudes between 600-1,400 meters</li>
+                    </ul>
+                </div>
+
+                <div class="oil-info">
+                    <h3>Clove Bud (Syzygium aromaticum)</h3>
+                    <p>Clove's warm, spicy aroma has made it a prized commodity for over 2,000 years. Native to Indonesia's Spice Islands, cloves were once worth more than gold in medieval Europe. Chinese emperors of the Han Dynasty required courtiers to chew cloves before addressing them.</p>
+                    <p><strong>Interesting Facts:</strong></p>
+                    <ul>
+                        <li>The Dutch East India Company maintained a monopoly on clove trade for nearly 200 years</li>
+                        <li>Clove trees can live and produce for over 100 years</li>
+                        <li>The spice inspired centuries of exploration and trade wars</li>
+                        <li>Zanzibar and Madagascar are now the world's largest producers</li>
+                    </ul>
+                </div>
+
+                <div class="oil-info">
+                    <h3>Lemon Eucalyptus (Corymbia citriodora)</h3>
+                    <p>Despite its name, lemon eucalyptus isn't related to lemon trees. This Australian native gets its citrusy scent from citronellal, the same compound that gives it its characteristic fresh aroma. Aboriginal Australians traditionally used eucalyptus species for various purposes.</p>
+                    <p><strong>Interesting Facts:</strong></p>
+                    <ul>
+                        <li>Can grow up to 50 meters tall in its native habitat</li>
+                        <li>The oil is steam-distilled from the leaves and twigs</li>
+                        <li>Brazil has become a major cultivation center outside Australia</li>
+                        <li>The tree's smooth bark sheds annually, creating stunning visual displays</li>
+                        <li>Young leaves have a different chemical composition than mature ones</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <h2>Directions for Use</h2>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <ol>
+                    <li><strong>Shake vigorously</strong> until mixture appears uniformly opaque</li>
+                    <li><strong>Spray 2-4 pumps</strong> on clothing or exposed skin</li>
+                    <li><strong>Best performance</strong> on natural fibers</li>
+                    <li><strong>Non-staining formula</strong></li>
+                    <li><strong>Reapply as desired</strong> throughout outdoor experiences</li>
+                </ol>
+                
+                <p><strong>Pro Tips:</strong></p>
+                <ul>
+                    <li>Apply to pulse points for longer-lasting scent</li>
+                    <li>Spray on bandanas or clothing cuffs for portable aromatherapy</li>
+                    <li>Perfect for hiking, camping, gardening, or outdoor dining</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <h2>Safety & Warnings</h2>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <div class="warning-box">
+                    <p><strong>⚠️ Important Safety Information:</strong></p>
+                    <ul>
+                        <li><strong>Flammable</strong> - Keep away from flame or spark</li>
+                        <li><strong>External use only</strong></li>
+                        <li><strong>Avoid direct contact</strong> with eyes as it may cause irritation</li>
+                        <li><strong>May irritate</strong> sensitive or broken skin</li>
+                        <li><strong>Patch test</strong> on inner arm before first use</li>
+                        <li><strong>Discontinue use</strong> if irritation occurs</li>
+                        <li><strong>Keep out of reach</strong> of children and pets</li>
+                        <li><strong>Consult physician</strong> if pregnant, nursing, or under medical care</li>
+                        <li><strong>Store below</strong> 30°C / 86°F</li>
+                    </ul>
+                </div>
+                
+                <p><strong>Classification:</strong> Cosmetic body mist; no therapeutic or pesticidal claims</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h3>Seal Creek™ Elixirs</h3>
+            <p>Hand-crafted in Denton, TX 76201</p>
+            <div class="contact-info">
+                <p>📞 817-948-2559</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleAccordion(header) {
+            const accordion = header.parentElement;
+            
+            // Close all other accordions
+            document.querySelectorAll('.accordion').forEach(acc => {
+                if (acc !== accordion) {
+                    acc.classList.remove('active');
+                }
+            });
+            
+            // Toggle current accordion
+            accordion.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
