@@ -440,10 +440,10 @@
                 <div class="oil-info">
                     <div class="oil-header">
                         <h3>Lavender (Lavandula angustifolia)</h3>
-                        <button class="image-toggle" onclick="togglePlantImage(this)">📷</button>
+                        <button class="image-toggle" onclick="togglePlantImage(this)">▶</button>
                     </div>
                     <div class="image-panel">
-                        <img src="images/lavender-plant.jpg" alt="Lavender Plant" class="plant-image">
+                        <img src="images/lavender-plant.png" alt="Lavender Plant" class="plant-image">
                     </div>
                     <p>The cornerstone of this blend, lavender has been treasured for millennia. Ancient Romans used it in their baths (the name comes from Latin 'lavare' - to wash), while medieval Europeans scattered it on floors to freshen rooms. Today, lavender remains one of the most beloved essential oils worldwide.</p>
                     <p><strong>Interesting Facts:</strong></p>
@@ -458,7 +458,7 @@
                 <div class="oil-info">
                     <div class="oil-header">
                         <h3>Peppermint (Mentha piperita)</h3>
-                        <button class="image-toggle" onclick="togglePlantImage(this)">📷</button>
+                        <button class="image-toggle" onclick="togglePlantImage(this)">▶</button>
                     </div>
                     <div class="image-panel">
                         <img src="images/peppermint-plant.png" alt="Peppermint Plant" class="plant-image">
@@ -477,10 +477,10 @@
                 <div class="oil-info">
                     <div class="oil-header">
                         <h3>Lemon Eucalyptus (Corymbia citriodora)</h3>
-                        <button class="image-toggle" onclick="togglePlantImage(this)">📷</button>
+                        <button class="image-toggle" onclick="togglePlantImage(this)">▶</button>
                     </div>
                     <div class="image-panel">
-                        <img src="images/eucalyptus-plant.jpg" alt="Lemon Eucalyptus Plant" class="plant-image">
+                        <img src="images/eucalyptus-plant.png" alt="Lemon Eucalyptus Plant" class="plant-image">
                     </div>
                     <p>Despite its name, lemon eucalyptus isn't related to lemon trees. This Australian native gets its citrusy scent from citronellal, the same compound that gives it its characteristic fresh aroma. Aboriginal Australians traditionally used eucalyptus species for various purposes.</p>
                     <p><strong>Interesting Facts:</strong></p>
@@ -582,13 +582,13 @@
             
             // Reset all button icons
             document.querySelectorAll('.image-toggle').forEach(btn => {
-                btn.textContent = '📷';
+                btn.textContent = '▶';
             });
             
             // Toggle current panel
             if (!isActive) {
                 imagePanel.classList.add('active');
-                button.textContent = '✖️';
+                button.textContent = '▼';
             }
         }
     </script>
