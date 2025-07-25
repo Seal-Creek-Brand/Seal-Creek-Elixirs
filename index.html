@@ -206,6 +206,59 @@
             border-left: 4px solid var(--accent-turquoise);
             padding: 15px;
             margin: 20px 0;
+            position: relative;
+        }
+
+        .oil-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .oil-header h3 {
+            margin: 0;
+        }
+
+        .image-toggle {
+            background-color: var(--accent-turquoise);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .image-toggle:hover {
+            background-color: #4a9999;
+            transform: scale(1.1);
+        }
+
+        .image-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            margin-bottom: 15px;
+        }
+
+        .image-panel.active {
+            max-height: 300px;
+        }
+
+        .plant-image {
+            width: 240px;
+            height: 240px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            object-fit: cover;
+            display: block;
+            margin: 15px auto 0;
         }
 
         ul, ol {
@@ -280,6 +333,21 @@
             .qr-code {
                 width: 220px;
                 height: 220px;
+            }
+            
+            .plant-image {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .oil-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .image-toggle {
+                align-self: flex-end;
             }
         }
 
@@ -370,19 +438,31 @@
             </div>
             <div class="accordion-content">
                 <div class="oil-info">
-                    <h3>Lavender (Lavandula angustifolia)</h3>
+                    <div class="oil-header">
+                        <h3>Lavender (Lavandula angustifolia)</h3>
+                        <button class="image-toggle" onclick="togglePlantImage(this)">📷</button>
+                    </div>
+                    <div class="image-panel">
+                        <img src="images/lavender-plant.jpg" alt="Lavender Plant" class="plant-image">
+                    </div>
                     <p>The cornerstone of this blend, lavender has been treasured for millennia. Ancient Romans used it in their baths (the name comes from Latin 'lavare' - to wash), while medieval Europeans scattered it on floors to freshen rooms. Today, lavender remains one of the most beloved essential oils worldwide.</p>
                     <p><strong>Interesting Facts:</strong></p>
                     <ul>
                         <li>Queen Victoria was known to demand fresh lavender in all royal residences</li>
                         <li>During WWI, lavender oil was used in field hospitals</li>
-                        <li>It takes approximately 3 pounds of lavender flowers to produce just 15mL of essential oil</li>
+                        <li>It takes approximately 100 pounds of lavender flowers to produce just one pound of essential oil</li>
                         <li>The finest lavender grows at altitudes between 600-1,400 meters</li>
                     </ul>
                 </div>
 
                 <div class="oil-info">
-                    <h3>Peppermint (Mentha piperita)</h3>
+                    <div class="oil-header">
+                        <h3>Peppermint (Mentha piperita)</h3>
+                        <button class="image-toggle" onclick="togglePlantImage(this)">📷</button>
+                    </div>
+                    <div class="image-panel">
+                        <img src="images/peppermint-plant.jpg" alt="Peppermint Plant" class="plant-image">
+                    </div>
                     <p>Peppermint's crisp, cooling aroma has made it a cherished herb for over 4,000 years. Ancient Egyptians cultivated mint varieties, while Greek mythology tells of the nymph Minthe being transformed into this aromatic plant. The Romans crowned themselves with mint wreaths at feasts, believing it aided digestion and cleared the mind.</p>
                     <p><strong>Interesting Facts:</strong></p>
                     <ul>
@@ -395,7 +475,13 @@
                 </div>
 
                 <div class="oil-info">
-                    <h3>Lemon Eucalyptus (Corymbia citriodora)</h3>
+                    <div class="oil-header">
+                        <h3>Lemon Eucalyptus (Corymbia citriodora)</h3>
+                        <button class="image-toggle" onclick="togglePlantImage(this)">📷</button>
+                    </div>
+                    <div class="image-panel">
+                        <img src="images/eucalyptus-plant.jpg" alt="Lemon Eucalyptus Plant" class="plant-image">
+                    </div>
                     <p>Despite its name, lemon eucalyptus isn't related to lemon trees. This Australian native gets its citrusy scent from citronellal, the same compound that gives it its characteristic fresh aroma. Aboriginal Australians traditionally used eucalyptus species for various purposes.</p>
                     <p><strong>Interesting Facts:</strong></p>
                     <ul>
@@ -483,6 +569,27 @@
             
             // Toggle current accordion
             accordion.classList.toggle('active');
+        }
+
+        function togglePlantImage(button) {
+            const imagePanel = button.closest('.oil-info').querySelector('.image-panel');
+            const isActive = imagePanel.classList.contains('active');
+            
+            // Close all other image panels
+            document.querySelectorAll('.image-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            
+            // Reset all button icons
+            document.querySelectorAll('.image-toggle').forEach(btn => {
+                btn.textContent = '📷';
+            });
+            
+            // Toggle current panel
+            if (!isActive) {
+                imagePanel.classList.add('active');
+                button.textContent = '✖️';
+            }
         }
     </script>
 </body>
