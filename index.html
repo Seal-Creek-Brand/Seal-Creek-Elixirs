@@ -164,6 +164,19 @@
             width:200px;height:auto;border:2px solid var(--border-color);border-radius:8px
         }
         .cosmetic-notice{text-align:center;font-style:italic;color:#666;margin:20px 0;font-size:.9em}
+        /* New styles for online buy buttons to make them a list */
+        .online-buy-buttons > div {
+            flex: none !important; /* Override flex properties */
+            min-width: unset !important; /* Override min-width */
+            width: 100%; /* Make them take full width to stack */
+            margin-bottom: 15px; /* Add some space between buttons */
+            text-align: center; /* Center the content within each div */
+        }
+        .online-buy-buttons {
+            display: block !important; /* Change parent to block to allow stacking */
+            gap: 0 !important; /* Remove gap */
+        }
+        /* End new styles */
         @media(max-width:600px){
             .header-content{flex-direction:column;align-items:center}
             .logo{width:180px;height:180px}
@@ -240,6 +253,28 @@
                         <h3>Zelle</h3>
                         <img src="images/seal-creek-venmo-qr.png" alt="Zelle QR Code" class="qr-code-small">
                         <p class="zelle-tip">Scan via your banking app</p>
+                    </div>
+                </div>
+                <div class="online-buy-buttons" style="display:block; margin-top:20px;">
+                    <div style="margin-bottom:15px; text-align:center;">
+                        <p>Buy 1 unit:</p>
+                        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+                        <stripe-buy-button buy-button-id="buy_btn_1Rpz6v1Xz1RJ20NomN2oxJXv" publishable-key="pk_live_51Rpb0l1Xz1RJ20NoMDHfwcqLfJFhdHrVAfSuMWBIx8JPaEyyBZiz6GFsVpyWflACHDtL2Bd2pufksEg90LB7g20L00xiv7TIU5"></stripe-buy-button>
+                    </div>
+                    <div style="margin-bottom:15px; text-align:center;">
+                        <p>Buy 5 units:</p>
+                        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+                        <stripe-buy-button buy-button-id="buy_btn_1Rpz771Xz1RJ20NoeF9BxLmT" publishable-key="pk_live_51Rpb0l1Xz1RJ20NoMDHfwcqLfJFhdHrVAfSuMWBIx8JPaEyyBZiz6GFsVpyWflACHDtL2Bd2pufksEg90LB7g20L00xiv7TIU5"></stripe-buy-button>
+                    </div>
+                    <div style="margin-bottom:15px; text-align:center;">
+                        <p>Buy 10 units:</p>
+                        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+                        <stripe-buy-button buy-button-id="buy_btn_1Rpz7O1Xz1RJ20No9F5fY49P" publishable-key="pk_live_51Rpb0l1Xz1RJ20NoMDHfwcqLfJFhdHrVAfSuMWBIx8JPaEyyBZiz6GFsVpyWflACHDtL2Bd2pufksEg90LB7g20L00xiv7TIU5"></stripe-buy-button>
+                    </div>
+                    <div style="margin-bottom:0; text-align:center;">
+                        <p>Buy 30 units:</p>
+                        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+                        <stripe-buy-button buy-button-id="buy_btn_1Rpz7R1Xz1RJ20NoBaJb7IZD" publishable-key="pk_live_51Rpb0l1Xz1RJ20NoMDHfwcqLfJFhdHrVAfSuMWBIx8JPaEyyBZiz6GFsVpyWflACHDtL2Bd2pufksEg90LB7g20L00xiv7TIU5"></stripe-buy-button>
                     </div>
                 </div>
             </div>
@@ -409,12 +444,16 @@
                 <a href="mailto:seal.creek.brand@gmail.com">seal.creek.brand@gmail.com</a>
             </div>
         </div>
+
+
     </div>
 
     <script>
         function toggleAccordion(h){
             const a=h.parentElement;
-            document.querySelectorAll('.accordion').forEach(acc=>{if(acc!==a)acc.classList.remove('active')});
+            document.querySelectorAll('.accordion').forEach(acc=>{
+                if(acc!==a)acc.classList.remove('active')
+            });
             a.classList.toggle('active')
         }
         function togglePlantImage(btn){
@@ -422,7 +461,10 @@
             const active=panel.classList.contains('active');
             document.querySelectorAll('.image-panel').forEach(p=>p.classList.remove('active'));
             document.querySelectorAll('.image-toggle').forEach(b=>b.textContent='▶');
-            if(!active){panel.classList.add('active');btn.textContent='▼'}
+            if(!active){
+                panel.classList.add('active');
+                btn.textContent='▼'
+            }
         }
     </script>
 </body>
