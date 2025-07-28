@@ -3,51 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seal Creek Elixirs™ - Outdoor Aromatic Body Spray</title>
+    <title>Seal Creek™ Elixirs - Outdoor Aromatic Body Spray</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --bg-primary: #d4c4a8;
             --bg-secondary: #e8dcc8;
             --text-primary: #2c2c2c;
-            --accent-turquoise: #5eb8b8;
+            --accent-green: #274e13;
             --border-color: #3a3a3a;
             --shadow: rgba(0, 0, 0, 0.1);
+            --preferred-green: #4a9456;
         }
-
         body {
             font-family: 'Georgia', serif;
-            background-color: var(--bg-primary) !important;
+            background-color: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
             min-height: 100vh;
         }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: var(--bg-primary) !important;
-        }
-
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
         header {
             text-align: center;
             padding: 40px 20px;
-            background-color: var(--bg-secondary) !important;
+            background-color: var(--bg-secondary);
             border: 3px solid var(--border-color);
             border-radius: 8px;
-            margin-bottom: 30px;
-            position: relative;
+            margin-bottom: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-
         .header-content {
             display: flex;
             align-items: center;
@@ -55,22 +41,14 @@
             width: 100%;
             max-width: 600px;
             margin-bottom: 10px;
+            gap: 20px;
         }
-
-        .logo {
-            width: 240px;
-            height: 240px;
-            flex-shrink: 0;
-        }
-
-        .brand-text {
-            text-align: left;
-        }
-
+        .logo { width: 240px; height: 240px; flex-shrink: 0; }
+        .brand-text { text-align: left; }
         .shake-badge {
             width: 80px;
             height: 80px;
-            background-color: var(--accent-turquoise) !important;
+            background-color: var(--accent-green);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -81,41 +59,33 @@
             color: white;
             flex-shrink: 0;
         }
-
-        h1 {
-            font-size: 2.5em;
-            font-weight: normal;
-            margin-bottom: 5px;
-            letter-spacing: -1px;
-        }
-
-        .subtitle {
-            font-style: italic;
-            font-size: 1.2em;
-            margin-bottom: 10px;
-        }
-
-        .volume {
-            font-size: 1.1em;
-            text-align: center;
-        }
-
-        .mission {
-            background-color: var(--bg-secondary) !important;
+        h1 { font-size: 2.5em; font-weight: normal; margin-bottom: 5px; letter-spacing: -1px; }
+        h2 { font-size: 1.4em; font-weight: normal; }
+        h3 { font-size: 1.5em; font-weight: normal; margin-bottom: 15px; }
+        h4 { font-size: 1.2em; font-weight: normal; }
+        .subtitle { font-style: italic; font-size: 1.2em; margin-bottom: 10px; }
+        .volume { font-size: 1.1em; text-align: center; }
+        .mission, .ingredient-box {
+            background-color: var(--bg-secondary);
             padding: 25px;
             border-radius: 8px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-align: center;
             font-style: italic;
             border: 2px solid var(--border-color);
         }
-
-        .accordion {
-            margin-bottom: 15px;
+        .ingredient-box { text-align: left; font-style: normal; }
+        .product-overview {
+            background-color: white;
+            padding: 30px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 20px;
         }
-
+        .product-overview h2 { font-size: 1.6em; margin-bottom: 15px; color: var(--accent-green); }
+        .accordion { margin-bottom: 15px; }
         .accordion-header {
-            background-color: var(--bg-secondary) !important;
+            background-color: var(--bg-secondary);
             padding: 20px;
             border: 2px solid var(--border-color);
             border-radius: 8px;
@@ -125,103 +95,106 @@
             align-items: center;
             transition: all 0.3s ease;
         }
-
-        .accordion-header:hover {
-            background-color: #ddd0b8 !important;
-        }
-
-        .accordion-header h2 {
-            font-size: 1.4em;
-            font-weight: normal;
-        }
-
-        .accordion-icon {
-            font-size: 1.5em;
-            transition: transform 0.3s ease;
-        }
-
+        .accordion-header:hover { background-color: #ddd0b8; }
+        .accordion-icon { font-size: 1.5em; transition: transform 0.3s ease; }
         .accordion-content {
             display: none;
             padding: 25px;
-            background-color: white !important;
+            background-color: white;
             border: 2px solid var(--border-color);
             border-top: none;
             border-radius: 0 0 8px 8px;
             margin-top: -2px;
         }
-
-        .accordion.active .accordion-icon {
-            transform: rotate(180deg);
-        }
-
-        .accordion.active .accordion-content {
-            display: block;
-        }
-
-        .payment-options {
+        .accordion.active .accordion-icon { transform: rotate(180deg); }
+        .accordion.active .accordion-content { display: block; }
+        .payment-options, .purchase-options {
             display: flex;
             justify-content: space-around;
-            gap: 40px;
+            gap: 30px;
             text-align: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
         }
-
+        .purchase-options { justify-content: center; }
         .payment-method {
             flex: 1;
             max-width: 200px;
+            padding: 15px;
         }
-
-        .payment-method h3 {
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            font-weight: normal;
+        .payment-method.preferred {
+            border: 3px solid var(--preferred-green);
+            border-radius: 12px;
+            background-color: #f9fff9;
+            max-width: 280px;
+            padding-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
-
-        .qr-code {
-            width: 200px;
-            height: 200px;
+        .qr-code { width: 200px; height: 200px; }
+        .qr-code-small { width: 140px; height: 140px; }
+        .qr-code, .qr-code-small {
             border: 2px solid var(--border-color);
             border-radius: 8px;
             margin: 0 auto;
             display: block;
         }
-
-        .ingredient-box {
-            background-color: var(--bg-secondary) !important;
-            border: 2px solid var(--border-color);
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
+        .preferred-label {
+            background-color: var(--preferred-green);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            display: inline-block;
         }
-
+        .payment-note { font-size: 0.9em; color: #666; margin-top: 10px; font-style: italic; }
+        .zelle-tip { font-size: 0.7em; color: #888; margin-top: 5px; }
+        .payment-header { text-align: center; margin-bottom: 25px; font-size: 1.2em; font-weight: bold; }
         .warning-box {
-            background-color: #f8f4e8 !important;
+            background-color: #f8f4e8;
             border: 2px solid #8b6914;
             padding: 20px;
             margin: 20px 0;
             border-radius: 8px;
         }
-
-        .oil-info {
-            background-color: #f5f0e8 !important;
-            border-left: 4px solid var(--accent-turquoise);
-            padding: 15px;
-            margin: 20px 0;
+        .hazard-icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background-color: #ff9800;
+            color: black;
+            text-align: center;
+            line-height: 24px;
+            font-weight: bold;
+            font-size: 18px;
+            transform: rotate(45deg);
+            margin-right: 8px;
             position: relative;
         }
-
+        .hazard-icon::before {
+            content: "!";
+            display: inline-block;
+            transform: rotate(-45deg);
+        }
+        .oil-info {
+            background-color: #f5f0e8;
+            border-left: 4px solid var(--accent-green);
+            padding: 15px;
+            margin: 20px 0;
+        }
         .oil-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 15px;
         }
-
-        .oil-header h3 {
-            margin: 0;
-        }
-
+        .oil-header h3 { margin: 0; }
+        .toggle-wrapper { display: flex; flex-direction: column; align-items: center; }
         .image-toggle {
-            background-color: var(--accent-turquoise);
+            background-color: var(--accent-green);
             color: white;
             border: none;
             border-radius: 50%;
@@ -234,23 +207,19 @@
             justify-content: center;
             transition: all 0.3s ease;
         }
-
-        .image-toggle:hover {
-            background-color: #4a9999;
-            transform: scale(1.1);
+        .image-toggle:hover { background-color: #1a3409; transform: scale(1.1); }
+        .toggle-label {
+            font-size: 10px;
+            margin-top: 2px;
+            color: var(--accent-green);
         }
-
         .image-panel {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease;
             margin-bottom: 15px;
         }
-
-        .image-panel.active {
-            max-height: 300px;
-        }
-
+        .image-panel.active { max-height: 300px; }
         .plant-image {
             width: 240px;
             height: 240px;
@@ -260,23 +229,61 @@
             display: block;
             margin: 15px auto 0;
         }
-
-        ul, ol {
-            margin-left: 30px;
-            margin-top: 10px;
+        .purchase-section {
+            background-color: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid var(--border-color);
         }
-
-        li {
-            margin-bottom: 8px;
+        .purchase-option {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
         }
-
+        .price {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--accent-green);
+            margin: 10px 0;
+        }
+        .buy-button {
+            background-color: var(--accent-green);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 15px;
+            font-family: 'Georgia', serif;
+        }
+        .buy-button:hover {
+            background-color: #1a3409;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px var(--shadow);
+        }
+        .shipping-info {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            text-align: left;
+        }
+        ul, ol { margin-left: 30px; margin-top: 10px; }
+        li { margin-bottom: 8px; }
         .footer {
             text-align: center;
             padding: 40px 20px;
             margin-top: 50px;
             border-top: 2px solid var(--border-color);
         }
-
         .contact-info {
             margin-top: 20px;
             display: flex;
@@ -284,13 +291,20 @@
             gap: 40px;
             flex-wrap: wrap;
         }
-
+        .contact-info p {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--accent-green);
+            background-color: var(--bg-secondary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--accent-green);
+        }
         .about-section {
             display: flex;
             align-items: flex-start;
             gap: 20px;
         }
-
         .about-image {
             width: 280px;
             height: 280px;
@@ -299,106 +313,52 @@
             border: 2px solid var(--border-color);
             object-fit: cover;
         }
-
         .about-text {
             flex: 1;
             font-style: italic;
-            font-family: 'Georgia', serif;
             font-size: 1.1em;
             line-height: 1.8;
-            color: var(--text-primary);
-            margin: 0;
             padding-top: 10px;
         }
-
-        @media (max-width: 600px) {
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-                align-items: center;
-            }
-            
-            .logo {
-                width: 180px;
-                height: 180px;
-            }
-            
-            .brand-text {
-                text-align: center;
-            }
-            
-            h1 {
-                font-size: 1.8em;
-            }
-            
-            .shake-badge {
-                width: 60px;
-                height: 60px;
-                font-size: 11px;
-            }
-            
-            .accordion-header h2 {
-                font-size: 1.2em;
-            }
-            
-            .container {
-                padding: 15px;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .payment-options {
-                flex-direction: column;
-                gap: 30px;
-                align-items: center;
-            }
-            
-            .qr-code {
-                width: 220px;
-                height: 220px;
-            }
-            
-            .plant-image {
-                width: 200px;
-                height: 200px;
-            }
-            
-            .oil-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .image-toggle {
-                align-self: flex-end;
-            }
-
-            .about-section {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .about-image {
-                width: 240px;
-                height: 240px;
-                margin-bottom: 20px;
-            }
-
-            .about-text {
-                text-align: center;
-                padding-top: 0;
-            }
+        .product-display {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 10px;
         }
-
+        .product-display img {
+            width: 200px;
+            height: auto;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+        }
         .cosmetic-notice {
             text-align: center;
             font-style: italic;
             color: #666;
             margin: 20px 0;
             font-size: 0.9em;
+        }
+        @media (max-width: 600px) {
+            .header-content { flex-direction: column; align-items: center; }
+            .logo { width: 180px; height: 180px; }
+            .brand-text { text-align: center; }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.2em; }
+            .shake-badge { width: 60px; height: 60px; font-size: 11px; }
+            .container { padding: 15px; }
+            .contact-info { flex-direction: column; gap: 10px; }
+            .payment-options, .purchase-options { flex-direction: column; align-items: center; }
+            .payment-method { max-width: 250px; }
+            .qr-code { width: 220px; height: 220px; }
+            .qr-code-small { width: 160px; height: 160px; }
+            .plant-image { width: 200px; height: 200px; }
+            .oil-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .image-toggle { align-self: flex-end; }
+            .about-section { flex-direction: column; align-items: center; }
+            .about-image { width: 240px; height: 240px; margin-bottom: 20px; }
+            .about-text { text-align: center; padding-top: 0; }
         }
     </style>
 </head>
@@ -408,7 +368,7 @@
             <div class="header-content">
                 <img src="images/seal-creek-logo.png" alt="Seal Creek Logo" class="logo">
                 <div class="brand-text">
-                    <h1>Seal Creek Elixirs</h1>
+                    <h1>Seal Creek™ Elixirs</h1>
                     <p class="subtitle">Outdoor Aromatic Body Spray</p>
                 </div>
                 <div class="shake-badge">SHAKE<br>WELL</div>
@@ -422,20 +382,41 @@
 
         <p class="cosmetic-notice">*For cosmetic use only. Not intended as insect repellent.*</p>
 
+        <div class="product-overview">
+            <h2>Product Overview</h2>
+            <p>Seal Creek™ Elixirs is a cosmetic fragrance designed to leave clothing and skin pleasantly scented during outdoor adventures. This small-batch, nature-inspired formula combines the calming essence of lavender with invigorating mint notes and fresh citric-camphor undertones.</p>
+            <p><strong>Key Features:</strong></p>
+            <ul>
+                <li>Eco-minded packaging with recyclable components</li>
+                <li>No synthetic fragrances, parabens, or phthalates</li>
+                <li>Hand-crafted in Denton, Texas</li>
+                <li>12+ month shelf life when stored properly</li>
+                <li>Fine mist sprayer for even application</li>
+            </ul>
+        </div>
+
         <div class="accordion">
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Payment Options</h2>
                 <span class="accordion-icon">▼</span>
             </div>
             <div class="accordion-content">
+                <p class="payment-header">$10 per bottle - Quick & Easy Payment</p>
                 <div class="payment-options">
                     <div class="payment-method">
                         <h3>Venmo</h3>
-                        <img src="images/seal-creek-zelle-qr.png" alt="Venmo QR Code" class="qr-code">
+                        <img src="images/seal-creek-zelle-qr.png" alt="Venmo QR Code" class="qr-code-small">
+                    </div>
+                    <div class="payment-method preferred">
+                        <span class="preferred-label">Preferred - Lower Fees</span>
+                        <h3>Stripe</h3>
+                        <img src="images/seal-creek-stripe-qr.png" alt="Stripe QR Code" class="qr-code">
+                        <p class="payment-note">Instant & Secure</p>
                     </div>
                     <div class="payment-method">
                         <h3>Zelle</h3>
-                        <img src="images/seal-creek-venmo-qr.png" alt="Zelle QR Code" class="qr-code">
+                        <img src="images/seal-creek-venmo-qr.png" alt="Zelle QR Code" class="qr-code-small">
+                        <p class="zelle-tip">Scan through your banking app</p>
                     </div>
                 </div>
             </div>
@@ -443,20 +424,13 @@
 
         <div class="accordion">
             <div class="accordion-header" onclick="toggleAccordion(this)">
-                <h2>Product Overview</h2>
+                <h2>Product Display</h2>
                 <span class="accordion-icon">▼</span>
             </div>
             <div class="accordion-content">
-                <p>Seal Creek Elixirs™ is a cosmetic fragrance designed to leave clothing and skin pleasantly scented during outdoor adventures. This small-batch, nature-inspired formula combines the calming essence of lavender with invigorating mint notes and fresh citric-camphor undertones.</p>
-                
-                <p><strong>Key Features:</strong></p>
-                <ul>
-                    <li>Eco-minded packaging with recyclable components</li>
-                    <li>No synthetic fragrances, parabens, or phthalates</li>
-                    <li>Hand-crafted in Denton, Texas</li>
-                    <li>12+ month shelf life when stored properly</li>
-                    <li>Fine mist sprayer for even application</li>
-                </ul>
+                <div class="product-display">
+                    <img src="images/seal-creek-logo.png" alt="Seal Creek Product">
+                </div>
             </div>
         </div>
 
@@ -482,7 +456,10 @@
                 <div class="oil-info">
                     <div class="oil-header">
                         <h3>Lavender (Lavandula angustifolia)</h3>
-                        <button class="image-toggle" onclick="togglePlantImage(this)">▶</button>
+                        <div class="toggle-wrapper">
+                            <button class="image-toggle" onclick="togglePlantImage(this)">▶</button>
+                            <span class="toggle-label">image</span>
+                        </div>
                     </div>
                     <div class="image-panel">
                         <img src="images/lavender-plant.png" alt="Lavender Plant" class="plant-image">
@@ -496,11 +473,13 @@
                         <li>The finest lavender grows at altitudes between 600-1,400 meters</li>
                     </ul>
                 </div>
-
                 <div class="oil-info">
                     <div class="oil-header">
                         <h3>Peppermint (Mentha piperita)</h3>
-                        <button class="image-toggle" onclick="togglePlantImage(this)">▶</button>
+                        <div class="toggle-wrapper">
+                            <button class="image-toggle" onclick="togglePlantImage(this)">▶</button>
+                            <span class="toggle-label">image</span>
+                        </div>
                     </div>
                     <div class="image-panel">
                         <img src="images/peppermint-plant.png" alt="Peppermint Plant" class="plant-image">
@@ -515,11 +494,13 @@
                         <li>Wild peppermint rarely reproduces by seed, instead spreading through underground runners</li>
                     </ul>
                 </div>
-
                 <div class="oil-info">
                     <div class="oil-header">
                         <h3>Lemon Eucalyptus (Corymbia citriodora)</h3>
-                        <button class="image-toggle" onclick="togglePlantImage(this)">▶</button>
+                        <div class="toggle-wrapper">
+                            <button class="image-toggle" onclick="togglePlantImage(this)">▶</button>
+                            <span class="toggle-label">image</span>
+                        </div>
                     </div>
                     <div class="image-panel">
                         <img src="images/eucalyptus-plant.png" alt="Lemon Eucalyptus Plant" class="plant-image">
@@ -551,10 +532,9 @@
                     <li><strong>Best performance</strong> on natural fibers</li>
                     <li><strong>Non-staining formula</strong></li>
                     <li><strong>Reapply as desired</strong> throughout outdoor experiences
-                        <ul><li>Optimal reapplication: every 30-45 minutes for best outdoor experience</li></ul>
+                        <ul><li>Reapply every 15‑45 minutes for sustained outdoor humanizing</li></ul>
                     </li>
                 </ol>
-                
                 <p><strong>Pro Tips:</strong></p>
                 <ul>
                     <li>Spray on bandanas or clothing cuffs for portable aromatherapy</li>
@@ -571,7 +551,7 @@
             <div class="accordion-content">
                 <div class="about-section">
                     <img src="images/Seal_Creek_ab_me_pic_opt1.png" alt="Seal Creek Owner" class="about-image">
-                    <p class="about-text">Seal Creek was born from evenings on Nana's porch, where the air always hinted at lavender and the Texas dusk felt kind. I seek to capture that simple comfort in a tiny spray bottle. Each batch is mixed by hand with lavender, lemon eucalyptus, and peppermint, with no heavy additives. A quick mist slips that porch calm into your pocket and leaves the night to speak for itself.</p>
+                    <p class="about-text">Seal Creek™ was born from evenings on Nana's porch, where the air always hinted at lavender and the Texas dusk felt kind. I seek to capture that simple comfort in a tiny spray bottle. Each batch is mixed by hand with lavender, lemon eucalyptus, and peppermint, with no heavy additives. A quick mist slips that porch calm into your pocket and leaves the night to speak for itself.</p>
                 </div>
             </div>
         </div>
@@ -583,7 +563,7 @@
             </div>
             <div class="accordion-content">
                 <div class="warning-box">
-                    <p><strong>⚠️ Important Safety Information:</strong></p>
+                    <p><strong><span class="hazard-icon"></span>Important Safety Information:</strong></p>
                     <ul>
                         <li><strong>Flammable</strong> - Keep away from flame or spark</li>
                         <li><strong>External use only</strong></li>
@@ -596,17 +576,51 @@
                         <li><strong>Store below</strong> 30°C / 86°F</li>
                     </ul>
                 </div>
-                
                 <p><strong>Classification:</strong> Cosmetic body mist; no therapeutic or pesticidal claims</p>
             </div>
         </div>
 
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <h2>Online Ordering</h2>
+                <span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content">
+                <div class="purchase-section">
+                    <h3>Order Online - Quick & Secure Checkout</h3>
+                    <div class="purchase-options">
+                        <div class="purchase-option">
+                            <h4>Single Bottle</h4>
+                            <p class="price">$24.99</p>
+                            <p>2 fl oz / 60 mL</p>
+                            <button class="buy-button" onclick="handlePurchase('single')">Buy Now</button>
+                        </div>
+                        <div class="purchase-option">
+                            <h4>Bundle Deal</h4>
+                            <p class="price">$69.99</p>
+                            <p>3 bottles (Save $5)</p>
+                            <button class="buy-button" onclick="handlePurchase('bundle')">Buy Bundle</button>
+                        </div>
+                    </div>
+                    <div class="shipping-info">
+                        <p><strong>Shipping Information:</strong></p>
+                        <ul>
+                            <li>Free shipping on orders over $35</li>
+                            <li>Processing time: 1-2 business days</li>
+                            <li>Estimated delivery: 3-5 business days</li>
+                            <li>Ships from Denton, TX</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="footer">
-            <h3>Seal Creek Elixirs</h3>
+            <h3>Seal Creek™ Elixirs</h3>
             <p>Hand-crafted in Denton, TX 76201</p>
             <div class="contact-info">
-                <p>📞 817-948-2559</p>
-                <p>📧 seal.creek.brand@gmail.com</p>
+                <p>817-948-2559</p>
+                <p>seal.creek.brand@gmail.com</p>
             </div>
         </div>
     </div>
@@ -614,36 +628,28 @@
     <script>
         function toggleAccordion(header) {
             const accordion = header.parentElement;
-            
-            // Close all other accordions
             document.querySelectorAll('.accordion').forEach(acc => {
-                if (acc !== accordion) {
-                    acc.classList.remove('active');
-                }
+                if (acc !== accordion) acc.classList.remove('active');
             });
-            
-            // Toggle current accordion
             accordion.classList.toggle('active');
         }
-
         function togglePlantImage(button) {
             const imagePanel = button.closest('.oil-info').querySelector('.image-panel');
             const isActive = imagePanel.classList.contains('active');
-            
-            // Close all other image panels
-            document.querySelectorAll('.image-panel').forEach(panel => {
-                panel.classList.remove('active');
-            });
-            
-            // Reset all button icons
-            document.querySelectorAll('.image-toggle').forEach(btn => {
-                btn.textContent = '▶';
-            });
-            
-            // Toggle current panel
+            document.querySelectorAll('.image-panel').forEach(panel => panel.classList.remove('active'));
+            document.querySelectorAll('.image-toggle').forEach(btn => btn.textContent = '▶');
             if (!isActive) {
                 imagePanel.classList.add('active');
                 button.textContent = '▼';
+            }
+        }
+        function handlePurchase(type) {
+            if (type === 'single') {
+                alert('Redirecting to checkout for single bottle...');
+                // window.location.href = 'YOUR_STRIPE_SINGLE_BOTTLE_LINK';
+            } else if (type === 'bundle') {
+                alert('Redirecting to checkout for 3-bottle bundle...');
+                // window.location.href = 'YOUR_STRIPE_BUNDLE_LINK';
             }
         }
     </script>
