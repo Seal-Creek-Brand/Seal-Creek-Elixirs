@@ -32,7 +32,8 @@ exports.handler = async (event, context) => {
 
     console.log('Fetching approved reviews from Airtable...');
     
-    const response = await fetch(`https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Reviews?filterByFormula=Status='Approved'&sort[0][field]=Timestamp&sort[0][direction]=desc`, {
+    // FIXED: Changed 'Approved' to 'Approved :)' to match the dropdown option
+    const response = await fetch(`https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Reviews?filterByFormula=Status='Approved :)'&sort[0][field]=Timestamp&sort[0][direction]=desc`, {
       headers: {
         'Authorization': `Bearer ${process.env.AIRTABLE_API_KEY}`,
       }
