@@ -590,10 +590,10 @@
 
         async function loadReviews() {
             try {
-                const response = await fetch(`https://api.airtable.com/v0/appwrY71IojY5a1Rs/Reviews?filterByFormula=Status='Approved'&sort[0][field]=Timestamp&sort[0][direction]=desc`, {
-                    headers: {
-                        'Authorization': 'Bearer patIggiL5ZHsAdzcV.1506cf5d5cc3219b4b11b34c7026c01308703bfb9021bbe52982736fb494bf66'
-                    }
+                // Call our Netlify function instead of Airtable directly
+                const response = await fetch(`${NETLIFY_SITE_URL}/.netlify/functions/load-reviews`, {
+                    method: 'GET',
+                    mode: 'cors'
                 });
                 
                 const data = await response.json();
