@@ -585,7 +585,9 @@
             }
         }
 
-        // Review System JavaScript
+        // Review System JavaScript - FIXED TO ALWAYS USE NETLIFY DOMAIN
+        const NETLIFY_SITE_URL = 'https://sealcreekelixirsreviews.netlify.app';
+
         async function loadReviews() {
             try {
                 const response = await fetch(`https://api.airtable.com/v0/appwrY71IojY5a1Rs/Reviews?filterByFormula=Status='Approved'&sort[0][field]=Timestamp&sort[0][direction]=desc`, {
@@ -623,7 +625,7 @@
             }
         }
 
-        // Handle form submission
+        // Handle form submission - FIXED TO ALWAYS USE NETLIFY DOMAIN
         document.getElementById('reviewForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -637,11 +639,13 @@
             const messageDiv = document.getElementById('formMessage');
             
             try {
-                const response = await fetch('/.netlify/functions/submit-review', {
+                // Always submit to the Netlify domain, regardless of where the page is viewed from
+                const response = await fetch(`${NETLIFY_SITE_URL}/.netlify/functions/submit-review`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
+                    mode: 'cors', // Enable CORS for cross-domain requests
                     body: JSON.stringify(formData)
                 });
                 
@@ -652,6 +656,7 @@
                     throw new Error('Failed to submit review');
                 }
             } catch (error) {
+                console.error('Error submitting review:', error);
                 messageDiv.innerHTML = '<div class="form-message error">Sorry, there was an error submitting your review. Please try again.</div>';
             }
         });
