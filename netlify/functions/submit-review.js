@@ -1,15 +1,20 @@
-const nodemailer = require('nodemailer');
-
 exports.handler = async (event, context) => {
+  console.log('Function started');
+  
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method not allowed' };
   }
 
   try {
+    console.log('Parsing request body...');
     const { name, email, rating, review } = JSON.parse(event.body);
+    console.log('Data received:', { name, rating });
 
-    // Create Airtable record
-    const airtableResponse = await fetch(`https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Reviews`, {
+    // Import fetch for Node.js
+    const fetch = (await import('node-fetch')).default;
+    
+    console.log('Making Airtable API call...');
+    const response = await fetch(`https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Reviews`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${process.env.AIRTABLE_API_KEY}`,
@@ -27,42 +32,22 @@ exports.handler = async (event, context) => {
       })
     });
 
-    const record = await airtableResponse.json();
-    const recordId = record.id;
+    console.log('Airtable response status:', response.status);
 
-    // Send email notification
-    const transporter = nodemailer.createTransporter({
-      service: 'gmail',
-      auth: {
-        user: process.env.USER_GMAIL,
-        pass: process.env.USER_GMAIL_PASS
-      }
-    });
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.log('Airtable error:', errorText);
+      throw new Error(`Airtable API error: ${response.status} - ${errorText}`);
+    }
 
-    const approveUrl = `${process.env.URL}/.netlify/functions/approve-review?id=${recordId}&action=approve`;
-    const rejectUrl = `${process.env.URL}/.netlify/functions/approve-review?id=${recordId}&action=reject`;
-
-    await transporter.sendMail({
-      from: process.env.USER_GMAIL,
-      to: process.env.USER_GMAIL,
-      subject: 'New Seal Creek Review to Approve',
-      html: `
-        <h3>New Review Submitted</h3>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Rating:</strong> ${rating}/5</p>
-        <p><strong>Review:</strong> ${review}</p>
-        <br>
-        <a href="${approveUrl}" style="background: green; color: white; padding: 10px; text-decoration: none;">APPROVE</a>
-        <a href="${rejectUrl}" style="background: red; color: white; padding: 10px; text-decoration: none;">REJECT</a>
-      `
-    });
-
+    console.log('Success!');
     return {
       statusCode: 200,
       body: JSON.stringify({ message: 'Review submitted successfully!' })
     };
 
   } catch (error) {
+    console.log('Error caught:', error.message);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message })
