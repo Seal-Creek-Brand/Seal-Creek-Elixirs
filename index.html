@@ -164,19 +164,18 @@
             width:200px;height:auto;border:2px solid var(--border-color);border-radius:8px
         }
         .cosmetic-notice{text-align:center;font-style:italic;color:#666;margin:20px 0;font-size:.9em}
-        /* New styles for online buy buttons to make them a list */
+        /* Styles for online buy buttons to make them a list */
         .online-buy-buttons > div {
-            flex: none !important; /* Override flex properties */
-            min-width: unset !important; /* Override min-width */
-            width: 100%; /* Make them take full width to stack */
-            margin-bottom: 15px; /* Add some space between buttons */
-            text-align: center; /* Center the content within each div */
+            flex: none !important;
+            min-width: unset !important;
+            width: 100%;
+            margin-bottom: 15px;
+            text-align: center;
         }
         .online-buy-buttons {
-            display: block !important; /* Change parent to block to allow stacking */
-            gap: 0 !important; /* Remove gap */
+            display: block !important;
+            gap: 0 !important;
         }
-        /* End new styles */
         @media(max-width:600px){
             .header-content{flex-direction:column;align-items:center}
             .logo{width:180px;height:180px}
@@ -238,23 +237,6 @@
             </div>
             <div class="accordion-content">
                 <p class="payment-header">$10 per bottle – quick & easy</p>
-                <div class="payment-options">
-                    <div class="payment-method">
-                        <h3>Venmo</h3>
-                        <img src="images/seal-creek-zelle-qr.png" alt="Venmo QR Code" class="qr-code-small">
-                    </div>
-                    <div class="payment-method preferred">
-                        <span class="preferred-label">Preferred</span>
-                        <h3>Stripe</h3>
-                        <img src="images/seal-creek-stripe-qr.png" alt="Stripe QR Code" class="qr-code">
-                        <p class="payment-note">Instant & secure</p>
-                    </div>
-                    <div class="payment-method">
-                        <h3>Zelle</h3>
-                        <img src="images/seal-creek-venmo-qr.png" alt="Zelle QR Code" class="qr-code-small">
-                        <p class="zelle-tip">Scan via your banking app</p>
-                    </div>
-                </div>
                 <div class="online-buy-buttons" style="display:block; margin-top:20px;">
                     <div style="margin-bottom:15px; text-align:center;">
                         <p>Buy 1 unit:</p>
@@ -271,10 +253,27 @@
                         <script async src="https://js.stripe.com/v3/buy-button.js"></script>
                         <stripe-buy-button buy-button-id="buy_btn_1Rpz7O1Xz1RJ20No9F5fY49P" publishable-key="pk_live_51Rpb0l1Xz1RJ20NoMDHfwcqLfJFhdHrVAfSuMWBIx8JPaEyyBZiz6GFsVpyWflACHDtL2Bd2pufksEg90LB7g20L00xiv7TIU5"></stripe-buy-button>
                     </div>
-                    <div style="margin-bottom:0; text-align:center;">
+                    <div style="margin-bottom:15px; text-align:center;">
                         <p>Buy 30 units:</p>
                         <script async src="https://js.stripe.com/v3/buy-button.js"></script>
                         <stripe-buy-button buy-button-id="buy_btn_1Rpz7R1Xz1RJ20NoBaJb7IZD" publishable-key="pk_live_51Rpb0l1Xz1RJ20NoMDHfwcqLfJFhdHrVAfSuMWBIx8JPaEyyBZiz6GFsVpyWflACHDtL2Bd2pufksEg90LB7g20L00xiv7TIU5"></stripe-buy-button>
+                    </div>
+                </div>
+                <div class="payment-options">
+                    <div class="payment-method">
+                        <h3>Venmo</h3>
+                        <img src="images/seal-creek-zelle-qr.png" alt="Venmo QR Code" class="qr-code-small">
+                    </div>
+                    <div class="payment-method preferred">
+                        <span class="preferred-label">Preferred</span>
+                        <h3>Stripe</h3>
+                        <img src="images/seal-creek-stripe-qr.png" alt="Stripe QR Code" class="qr-code">
+                        <p class="payment-note">Instant & secure</p>
+                    </div>
+                    <div class="payment-method">
+                        <h3>Zelle</h3>
+                        <img src="images/seal-creek-venmo-qr.png" alt="Zelle QR Code" class="qr-code-small">
+                        <p class="zelle-tip">Scan via your banking app</p>
                     </div>
                 </div>
             </div>
