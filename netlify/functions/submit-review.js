@@ -78,7 +78,7 @@ exports.handler = async (event, context) => {
 
     // --- Email Notification ---
     console.log('Attempting to send email notification...');
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({  // FIXED: removed 'er' from createTransporter
       service: 'gmail',
       auth: {
         user: process.env.USER_GMAIL, // Using your custom env var name
