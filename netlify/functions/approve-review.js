@@ -1,6 +1,5 @@
 exports.handler = async (event, context) => {
   console.log('approve-review function started');
-  console.log('Event:', JSON.stringify(event, null, 2));
 
   if (event.httpMethod !== 'GET') {
     return { statusCode: 405, body: 'Method not allowed' };
@@ -26,19 +25,10 @@ exports.handler = async (event, context) => {
     const fetch = (await import('node-fetch')).default;
     console.log('node-fetch imported successfully.');
 
-    // Check environment variables
-    console.log('Environment check:', {
-      AIRTABLE_BASE_ID: process.env.AIRTABLE_BASE_ID ? 'SET' : 'MISSING',
-      AIRTABLE_API_KEY: process.env.AIRTABLE_API_KEY ? 'SET' : 'MISSING'
-    });
-
     if (action === 'approve') {
       console.log(`Attempting to APPROVE record with ID: ${id}`);
       
-      const airtableUrl = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Reviews/${id}`;
-      console.log('Airtable URL:', airtableUrl);
-
-      const response = await fetch(airtableUrl, {
+      const response = await fetch(`https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Reviews/${id}`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${process.env.AIRTABLE_API_KEY}`,
@@ -46,7 +36,7 @@ exports.handler = async (event, context) => {
         },
         body: JSON.stringify({
           fields: {
-            Status: 'Approved'
+            Status: 'Approved :)'  // FIXED: Added the smiley face!
           }
         })
       });
@@ -60,8 +50,7 @@ exports.handler = async (event, context) => {
       }
 
       const result = await response.json();
-      console.log('Airtable success response:', JSON.stringify(result, null, 2));
-      console.log(`Record ${id} successfully marked as Approved in Airtable.`);
+      console.log(`Record ${id} successfully marked as Approved :) in Airtable.`);
 
       return {
         statusCode: 200,
@@ -80,10 +69,7 @@ exports.handler = async (event, context) => {
     } else if (action === 'reject') {
       console.log(`Attempting to REJECT (delete) record with ID: ${id}`);
       
-      const airtableUrl = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Reviews/${id}`;
-      console.log('Airtable URL:', airtableUrl);
-
-      const response = await fetch(airtableUrl, {
+      const response = await fetch(`https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Reviews/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${process.env.AIRTABLE_API_KEY}`,
@@ -128,7 +114,6 @@ exports.handler = async (event, context) => {
 
   } catch (error) {
     console.error('Error caught in approve-review function:', error.message);
-    console.error('Error stack:', error.stack);
     return {
       statusCode: 500,
       headers: { 'Content-Type': 'text/html' },
