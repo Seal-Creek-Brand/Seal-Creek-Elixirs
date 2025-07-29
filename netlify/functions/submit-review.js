@@ -1,10 +1,31 @@
-const nodemailer = require('nodemailer'); // <-- Make sure this is here!
+const nodemailer = require('nodemailer');
 
 exports.handler = async (event, context) => {
   console.log('Function started');
 
+  // Handle CORS preflight requests
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      },
+      body: ''
+    };
+  }
+
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method not allowed' };
+    return { 
+      statusCode: 405, 
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      },
+      body: 'Method not allowed' 
+    };
   }
 
   try {
@@ -57,7 +78,7 @@ exports.handler = async (event, context) => {
 
     // --- Email Notification ---
     console.log('Attempting to send email notification...');
-    const transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransporter({
       service: 'gmail',
       auth: {
         user: process.env.USER_GMAIL, // Using your custom env var name
@@ -94,6 +115,11 @@ exports.handler = async (event, context) => {
 
     return {
       statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      },
       body: JSON.stringify({ message: 'Review submitted successfully and awaiting approval!' })
     };
   } catch (error) {
@@ -104,6 +130,11 @@ exports.handler = async (event, context) => {
     }
     return {
       statusCode: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      },
       body: JSON.stringify({ error: error.message || 'An unexpected error occurred.' })
     };
   }
