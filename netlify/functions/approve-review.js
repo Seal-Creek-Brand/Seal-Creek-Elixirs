@@ -1,12 +1,13 @@
 exports.handler = async (event, context) => {
   console.log('approve-review function started');
+  console.log('Event:', JSON.stringify(event, null, 2));
 
   if (event.httpMethod !== 'GET') {
     return { statusCode: 405, body: 'Method not allowed' };
   }
 
   try {
-    const { id, action } = event.queryStringParameters;
+    const { id, action } = event.queryStringParameters || {};
     console.log(`Received request: id=${id}, action=${action}`);
 
     if (!id) {
@@ -25,9 +26,19 @@ exports.handler = async (event, context) => {
     const fetch = (await import('node-fetch')).default;
     console.log('node-fetch imported successfully.');
 
+    // Check environment variables
+    console.log('Environment check:', {
+      AIRTABLE_BASE_ID: process.env.AIRTABLE_BASE_ID ? 'SET' : 'MISSING',
+      AIRTABLE_API_KEY: process.env.AIRTABLE_API_KEY ? 'SET' : 'MISSING'
+    });
+
     if (action === 'approve') {
       console.log(`Attempting to APPROVE record with ID: ${id}`);
-      await fetch(`https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Reviews/${id}`, {
+      
+      const airtableUrl = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Reviews/${id}`;
+      console.log('Airtable URL:', airtableUrl);
+
+      const response = await fetch(airtableUrl, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${process.env.AIRTABLE_API_KEY}`,
@@ -39,7 +50,19 @@ exports.handler = async (event, context) => {
           }
         })
       });
+
+      console.log('Airtable response status:', response.status);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.log('Airtable error response:', errorText);
+        throw new Error(`Airtable API error: ${response.status} - ${errorText}`);
+      }
+
+      const result = await response.json();
+      console.log('Airtable success response:', JSON.stringify(result, null, 2));
       console.log(`Record ${id} successfully marked as Approved in Airtable.`);
+
       return {
         statusCode: 200,
         headers: { 'Content-Type': 'text/html' },
@@ -53,15 +76,30 @@ exports.handler = async (event, context) => {
           </html>
         `
       };
+
     } else if (action === 'reject') {
       console.log(`Attempting to REJECT (delete) record with ID: ${id}`);
-      await fetch(`https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Reviews/${id}`, {
+      
+      const airtableUrl = `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Reviews/${id}`;
+      console.log('Airtable URL:', airtableUrl);
+
+      const response = await fetch(airtableUrl, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${process.env.AIRTABLE_API_KEY}`,
         }
       });
+
+      console.log('Airtable response status:', response.status);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.log('Airtable error response:', errorText);
+        throw new Error(`Airtable API error: ${response.status} - ${errorText}`);
+      }
+
       console.log(`Record ${id} successfully deleted from Airtable.`);
+
       return {
         statusCode: 200,
         headers: { 'Content-Type': 'text/html' },
@@ -75,6 +113,7 @@ exports.handler = async (event, context) => {
           </html>
         `
       };
+
     } else {
       console.log('Error: Invalid action parameter provided.');
       return {
@@ -86,8 +125,10 @@ exports.handler = async (event, context) => {
               </body></html>`
       };
     }
+
   } catch (error) {
     console.error('Error caught in approve-review function:', error.message);
+    console.error('Error stack:', error.stack);
     return {
       statusCode: 500,
       headers: { 'Content-Type': 'text/html' },
