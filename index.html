@@ -13,7 +13,9 @@
             --accent-green:#274e13;
             --border-color:#3a3a3a;
             --shadow:rgba(0,0,0,.1);
-            --preferred-green:#4a9456
+            --preferred-green:#4a9456;
+            /* New: 5% lighter shade of accent-green */
+            --accent-green-lighter: hsl(100, 56%, 25%); /* Original HSL: hsl(100, 56%, 20%) */
         }
         body{
             font-family:'Georgia',serif;
@@ -88,10 +90,16 @@
         .accordion-content{
             display:none;padding:25px;background:#fff;
             border:2px solid var(--border-color);border-top:none;
-            border-radius:0 0 8px 8px;margin-top:-2px
+            border-radius:0 0 8px 8px;margin-top:-2px;
+            /* Default max-height for all accordion content */
+            max-height: 500px; /* Adjust as needed for typical content */
+            overflow-y: hidden; /* Hidden by default, changes to auto when active */
         }
         .accordion.active .accordion-icon{transform:rotate(180deg)}
-        .accordion.active .accordion-content{display:block}
+        .accordion.active .accordion-content{
+            display:block;
+            overflow-y: auto; /* Enable scrolling when active */
+        }
         .payment-options{
             display:flex;justify-content:space-around;gap:30px;text-align:center;
             margin:30px 0;flex-wrap:wrap
@@ -261,6 +269,48 @@
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
+        /* New: Disclaimer style */
+        .disclaimer {
+            font-size: 0.85em; /* Slightly smaller text */
+            color: var(--accent-green-lighter); /* 5% lighter green */
+            text-align: center;
+            margin: 15px 0; /* Add some space above and below */
+            padding: 10px;
+            border: 1px solid var(--accent-green-lighter);
+            border-radius: 5px;
+            background-color: rgba(230, 240, 220, 0.5); /* A subtle background to make it stand out */
+        }
+
+        /* Added for the new Terms of Service link in the footer */
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* Space between links */
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            font-size: 0.9em; /* Smaller font for footer links */
+            font-weight: normal;
+            color: var(--text-primary);
+            background: none;
+            padding: 0;
+            border: none;
+            text-decoration: underline;
+        }
+        .footer-links a:hover {
+            color: var(--accent-green);
+            background: none;
+        }
+
+        /* Specific style for Terms of Service accordion content to enable scrolling */
+        .terms-accordion-content {
+            max-height: 400px; /* Set a fixed max height for scrolling */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding-right: 15px; /* Add some padding to prevent scrollbar from touching text */
+        }
+
+
         @media(max-width:600px){
             .header-content{flex-direction:column;align-items:center}
             .logo{width:180px;height:180px}
@@ -281,6 +331,14 @@
             .about-image{width:240px;height:240px;margin-bottom:20px}
             .about-text{text-align:center;padding-top:0}
             .review-header{flex-direction:column;align-items:flex-start;gap:5px}
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+            /* Adjust max-height for terms on smaller screens if needed */
+            .terms-accordion-content {
+                max-height: 300px; /* Smaller max-height for mobile */
+            }
         }
     </style>
 </head>
@@ -391,10 +449,14 @@
                 
                 <div id="reviewsDisplay">
                     <h3>Reviews</h3>
+                    <!-- Moved disclaimer to here -->
+                    <p class="disclaimer">Reviews are personal testimonies and may not represent the typical results or intended use of the product. Individual experiences may vary.</p>
                     <div id="reviewsList">
                         <div class="no-reviews">No reviews yet. Be the first to share your experience!</div>
                     </div>
                 </div>
+                <!-- Second disclaimer remains here -->
+                <p class="disclaimer">Reviews are personal testimonies and may not represent the typical results or intended use of the product. Individual experiences may vary.</p>
             </div>
         </div>
 
@@ -551,6 +613,152 @@
                     </ul>
                 </div>
                 <p><strong>Classification:</strong> cosmetic body mist; no therapeutic or pesticidal claims</p>
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <h2>Terms of Service & Legal Information</h2><span class="accordion-icon">▼</span>
+            </div>
+            <div class="accordion-content terms-accordion-content">
+                
+                <div class="warning-box">
+                    <p><strong><span class="hazard-icon"></span>IMPORTANT LEGAL NOTICE:</strong> By purchasing or using Seal Creek™ Elixirs products, you agree to these Terms of Service. Please read carefully before use.</p>
+                </div>
+
+                <h3>1. Product Classification & Intended Use</h3>
+                <p>Seal Creek™ Outdoor Aromatic Body Spray is classified as a <strong>cosmetic product</strong> under FDA regulations (21 CFR 701). This product is intended solely for cosmetic fragrance purposes and is <strong>NOT intended as an insect repellent, therapeutic treatment, or pesticide</strong>. Any insect-related benefits are incidental and not claimed by the manufacturer.</p>
+
+                <h3>2. Age Requirements & Usage Restrictions</h3>
+                <p>This product is intended for <strong>adults 18 years and older</strong>. Not recommended for:</p>
+                <ul>
+                    <li>Pregnant or nursing women without physician approval</li>
+                    <li>Children under 18 years of age</li>
+                    <li>Individuals with known essential oil sensitivities</li>
+                    <li>Persons with compromised skin barriers or dermatological conditions</li>
+                </ul>
+
+                <h3>3. Essential Oil Safety & Skin Sensitivity</h3>
+                <div class="oil-info">
+                    <p><strong>PATCH TEST REQUIRED:</strong> Essential oils may cause allergic reactions. Apply small amount to inner wrist 24 hours before first use. Discontinue if redness, irritation, or sensitivity occurs.</p>
+                    <p><strong>Photosensitivity Warning:</strong> Bergamot oil may increase sun sensitivity. Avoid direct sunlight on treated areas for 12 hours after application.</p>
+                    <p><strong>Concentration Limits:</strong> Our essential oil concentrations comply with IFRA (International Fragrance Association) safety standards for leave-on cosmetic products.</p>
+                </div>
+
+                <h3>4. Product Safety & Hazard Information</h3>
+                <div class="warning-box">
+                    <p><strong>FLAMMABLE PRODUCT:</strong></p>
+                    <ul>
+                        <li>Contains alcohol - keep away from flames, sparks, and heat sources</li>
+                        <li>Do not use near open flames or while smoking</li>
+                        <li>Store below 30°C (86°F) in cool, dry place</li>
+                        <li>Vapors may be harmful if inhaled in confined spaces</li>
+                    </ul>
+                </div>
+
+                <h3>5. Quality & Batch Consistency</h3>
+                <p>As a <strong>handcrafted, small-batch cosmetic</strong>, natural variations in color, scent intensity, and texture may occur due to:</p>
+                <ul>
+                    <li>Seasonal variations in essential oil composition</li>
+                    <li>Natural aging of botanical ingredients</li>
+                    <li>Handcrafted production methods</li>
+                </ul>
+                <p>Such variations are <strong>normal characteristics</strong> of artisanal cosmetics and do not constitute product defects.</p>
+
+                <h3>6. Proper Usage Instructions (Compliance Required)</h3>
+                <ol>
+                    <li><strong>Shake vigorously</strong> before each use until opaque</li>
+                    <li><strong>External use only</strong> - avoid eyes, mucous membranes, and broken skin</li>
+                    <li>Apply 2-4 sprays to exposed skin or clothing</li>
+                    <li><strong>Do not exceed</strong> recommended application frequency</li>
+                    <li>Wash hands after application</li>
+                    <li>If product enters eyes, flush immediately with water</li>
+                </ol>
+
+                <h3>7. Cosmetic Product Liability Limitations</h3>
+                <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW</strong>, Seal Creek™ Elixirs liability for cosmetic products is limited to:</p>
+                <ul>
+                    <li>Product replacement for manufacturing defects only</li>
+                    <li>No liability for skin reactions despite patch testing</li>
+                    <li>No liability for misuse contrary to label instructions</li>
+                    <li>No liability for individual sensitivities or allergies</li>
+                    <li>No liability for staining of fabrics (though product is designed to be non-staining)</li>
+                </ul>
+
+                <h3>8. FDA Cosmetic Regulation Compliance</h3>
+                <div class="oil-info">
+                    <p><strong>Cosmetic Disclaimer:</strong> This product has not been evaluated by the FDA. As a cosmetic product, no therapeutic, medicinal, or pesticidal claims are made.</p>
+                    <p><strong>Ingredients:</strong> All ingredients are listed using INCI (International Nomenclature of Cosmetic Ingredients) standards as required by FDA regulations.</p>
+                    <p><strong>Labeling:</strong> Product labeling complies with FDA cosmetic labeling requirements under 21 CFR 701.3.</p>
+                </div>
+
+                <h3>9. Returns & Refunds Policy</h3>
+                <div class="warning-box">
+                    <p><strong>ALL SALES ARE FINAL - NO RETURNS OR REFUNDS</strong></p>
+                </div>
+                <p>Due to the personal care nature of cosmetic products and health regulations:</p>
+                <ul>
+                    <li><strong>No returns accepted</strong> for any reason (opened, unopened, or unused products)</li>
+                    <li><strong>No refunds</strong> for customer dissatisfaction, scent preferences, or skin reactions</li>
+                    <li><strong>No exchanges</strong> available under any circumstances</li>
+                    <li><strong>Manufacturing defects only:</strong> Proven contamination or packaging failure will receive replacement (not refund) with photographic evidence required within 48 hours of receipt</li>
+                    <li><strong>Burden of proof:</strong> Customer must demonstrate manufacturing defect, not normal product variations</li>
+                </ul>
+                <p><strong>By purchasing, you acknowledge:</strong> You understand this is a final sale of a handcrafted cosmetic product with natural ingredient variations, and you accept all risks associated with essential oil-based cosmetics including potential skin sensitivities.</p>
+
+                <h3>10. Environmental & Sustainability Claims</h3>
+                <p>Any environmental claims are substantiated and comply with <strong>FTC Green Guides (16 CFR Part 260)</strong>:</p>
+                <ul>
+                    <li>Recyclable packaging claims based on local recycling availability</li>
+                    <li>Eco-minded formulation refers to ingredient sourcing practices</li>
+                    <li>No unsubstantiated "natural" or "organic" claims made</li>
+                </ul>
+
+                <h3>11. Intellectual Property & Trade Secrets</h3>
+                <p>Seal Creek™ proprietary formulations, ratios, and production methods are <strong>protected trade secrets</strong>. Prohibited activities include:</p>
+                <ul>
+                    <li>Reverse engineering or chemical analysis for reproduction</li>
+                    <li>Unauthorized copying of formulations or processes</li>
+                    <li>Using trademark or trade name without permission</li>
+                    <li>Creating derivative products based on our formulations</li>
+                </ul>
+
+                <h3>12. User Content & Review Guidelines</h3>
+                <p><strong>Prohibited Review Content:</strong></p>
+                <ul>
+                    <li>Medical or therapeutic claims about the product</li>
+                    <li>Pesticide or insect repellent effectiveness claims</li>
+                    <li>Unsubstantiated safety or efficacy statements</li>
+                    <li>Comparison to regulated products (drugs, pesticides)</li>
+                </ul>
+                <p>Reviews must reflect personal cosmetic experience only and comply with FTC guidelines for consumer testimonials.</p>
+
+                <h3>13. Adverse Event Reporting</h3>
+                <div class="warning-box">
+                    <p><strong>REPORT ADVERSE REACTIONS:</strong> If you experience any adverse skin reactions, allergic responses, or safety concerns, immediately:</p>
+                    <ul>
+                        <li>Discontinue use and wash affected area</li>
+                        <li>Seek medical attention if severe reaction occurs</li>
+                        <li>Report to us at: <strong><a href="mailto:seal.creek.brand@gmail.com">seal.creek.brand@gmail.com</a></strong></li>
+                        <li>Report to FDA via MedWatch if serious adverse event</li>
+                    </ul>
+                </div>
+
+                <h3>14. State & Local Compliance</h3>
+                <p>Some jurisdictions may have additional restrictions on cosmetic products containing essential oils. <strong>You are responsible</strong> for ensuring compliance with all applicable state and local regulations in your area.</p>
+
+                <h3>15. Dispute Resolution</h3>
+                <p><strong>Governing Law:</strong> Texas state law governs these terms. Any disputes will be resolved through binding arbitration in Texas, except for claims eligible for small claims court or regulatory complaints to appropriate agencies.</p>
+
+                <h3>16. Contact Information</h3>
+                <div class="oil-info">
+                    <p><strong>All Inquiries:</strong> <a href="mailto:seal.creek.brand@gmail.com">seal.creek.brand@gmail.com</a></p>
+                    <p><strong>Phone:</strong> <a href="tel:+18179482559">817-948-2559</a></p>
+                    <p><em>For safety reports, legal questions, or general inquiries, please use the email above and specify the nature of your inquiry in the subject line.</em></p>
+                </div>
+
+                <p class="disclaimer">By using this product, you acknowledge reading and agreeing to these Terms of Service. Last updated: July 30, 2025</p>
+
             </div>
         </div>
 
