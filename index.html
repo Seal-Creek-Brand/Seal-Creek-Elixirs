@@ -135,14 +135,16 @@
         .accordion.active .accordion-icon{transform:rotate(180deg)}
         .accordion.active .accordion-content{
             padding: 25px; /* Restore padding when active */
+            /* max-height will be set by JS dynamically */
+            /* overflow-y will be set by JS dynamically */
         }
 
-        /* Specific styles for scrollable accordion content (Terms & Essential Oil Info) */
-        .accordion-content.scrollable-content.active {
-            max-height: 600px; /* Increased fixed max height for scrolling content */
-            overflow-y: auto; /* Enable vertical scrolling */
-            padding-right: 15px; /* Add some padding to prevent scrollbar from touching text */
-        }
+        /* Specific styles for scrollable accordion content (Terms & Essential Oil Info) - REMOVED FIXED MAX-HEIGHT */
+        /* .accordion-content.scrollable-content.active {
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 15px;
+        } */
 
         /* Payment options layout */
         .payment-options{
@@ -215,7 +217,11 @@
         .contact-info a{
             font-size:1.1em;font-weight:bold;color:var(--accent-green);background:var(--bg-secondary);
             padding:10px 20px;border-radius:8px;border:1px solid var(--accent-green);
-            text-decoration:none
+            text-decoration:none;
+            display: inline-block; /* Ensure it respects padding and margin properly */
+            box-sizing: border-box; /* Include padding/border in element's total width/height */
+            height: auto; /* Allow height to adjust based on content */
+            white-space: normal; /* Allow text to wrap if it's too long */
         }
         .contact-info a:hover{background:#c9b89a}
 
@@ -396,10 +402,10 @@
                 flex-direction: column;
                 gap: 10px;
             }
-            /* Adjust max-height for scrollable content on smaller screens if needed */
-            .accordion-content.scrollable-content.active {
-                max-height: 450px; /* Increased smaller max-height for mobile */
-            }
+            /* Removed fixed max-height for scrollable content on smaller screens */
+            /* .accordion-content.scrollable-content.active {
+                max-height: 450px;
+            } */
         }
     </style>
 </head>
@@ -440,7 +446,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Payment Options</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content static-content">
+            <div class="accordion-content">
                 <p class="payment-header">$10 per bottle – quick & easy</p>
                 <div class="online-buy-buttons" style="display:block; margin-top:20px;">
                     <div style="margin-bottom:15px; text-align:center;">
@@ -488,7 +494,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Customer Reviews</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content scrollable-content">
+            <div class="accordion-content">
                 <div class="review-form">
                     <h3>Write a Review</h3>
                     <div id="formMessage"></div>
@@ -523,7 +529,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Product Display</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content static-content">
+            <div class="accordion-content">
                 <div class="product-display">
                     <img src="images/seal-creek-elixir-2oz-bottle-pic.png" alt="Seal Creek™ 2 oz Bottle">
                 </div>
@@ -534,7 +540,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Ingredients (INCI)</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content static-content">
+            <div class="accordion-content">
                 <div class="ingredient-box">
                     <p><strong>Full INCI List:</strong></p>
                     <p>Aqua (Water), Alcohol Denat., Lavandula angustifolia (Lavender) Oil, Mentha piperita (Peppermint) Oil, Corymbia citriodora Oil, Soap, Glycerin, Citrus Aurantium Bergamia (Bergamot) Fruit Oil, Juniperus Virginiana (Cedarwood) Oil, Fragrance (Parfum), Olea Europaea (Olive) Fruit Oil, Aloe Barbadensis Leaf Juice, Citric Acid, Sodium Chloride, Potassium Sorbate, Sodium Benzoate.</p>
@@ -546,7 +552,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Essential Oil Information</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content scrollable-content">
+            <div class="accordion-content">
 
                 <div class="oil-info">
                     <div class="oil-header">
@@ -621,7 +627,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Directions for Use</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content static-content">
+            <div class="accordion-content">
                 <ol>
                     <li><strong>Shake vigorously</strong> until mixture appears uniformly opaque</li>
                     <li><strong>Spray 2–4 pumps</strong> on exposed skin or clothing</li>
@@ -644,7 +650,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>About the Owner</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content static-content">
+            <div class="accordion-content">
                 <div class="about-section">
                     <img src="images/Seal_Creek_ab_me_pic_opt1.png" alt="Owner portrait" class="about-image">
                     <p class="about-text">Seal Creek™ was born from evenings on Nana's porch, where lavender drifted through Texas dusk. Each batch is mixed by hand with lavender, lemon eucalyptus, and peppermint—no heavy additives—bottling porch calm for your pocket.</p>
@@ -656,7 +662,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Safety & Warnings</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content static-content">
+            <div class="accordion-content">
                 <div class="warning-box">
                     <p><strong><span class="hazard-icon"></span>Important Safety Information:</strong></p>
                     <ul>
@@ -679,7 +685,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Terms of Service & Legal Information</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content scrollable-content">
+            <div class="accordion-content">
                 
                 <div class="warning-box">
                     <p><strong><span class="hazard-icon"></span>IMPORTANT LEGAL NOTICE:</strong> By purchasing or using Seal Creek™ Elixirs products, you agree to these Terms of Service. Please read carefully before use.</p>
@@ -849,6 +855,8 @@
                     const otherContent = accordion.querySelector('.accordion-content');
                     otherContent.style.maxHeight = '0'; // Collapse other content
                     otherContent.style.overflowY = 'hidden'; // Hide overflow for smooth collapse
+                    // Also reset padding if it was changed
+                    otherContent.style.padding = '0 25px';
                 }
             });
 
@@ -858,17 +866,13 @@
                 currentAccordion.classList.remove('active');
                 content.style.maxHeight = '0';
                 content.style.overflowY = 'hidden';
+                content.style.padding = '0 25px'; // Reset padding when closed
             } else {
                 // If it was not active, open it
                 currentAccordion.classList.add('active');
-                // Determine if content should scroll or fully expand
-                if (content.classList.contains('scrollable-content')) {
-                    content.style.maxHeight = '600px'; // Fixed height for scrolling content (increased from 400px)
-                    content.style.overflowY = 'auto'; // Enable scrolling
-                } else {
-                    content.style.maxHeight = content.scrollHeight + 'px'; // Expand to full content height
-                    content.style.overflowY = 'hidden'; // No scrolling for static content
-                }
+                content.style.maxHeight = content.scrollHeight + 'px'; // Expand to full content height
+                content.style.overflowY = 'auto'; // Enable scrolling if content overflows naturally
+                content.style.padding = '25px'; // Restore padding when active
             }
         }
 
