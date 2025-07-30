@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seal Creek™ Elixirs - Outdoor Aromatic Body Spray</title>
     <style>
+        /* Universal box-sizing */
         *{margin:0;padding:0;box-sizing:border-box}
+
+        /* Root CSS variables for consistent theming */
         :root{
             --bg-primary:#d4c4a8;
             --bg-secondary:#e8dcc8;
@@ -14,9 +17,10 @@
             --border-color:#3a3a3a;
             --shadow:rgba(0,0,0,.1);
             --preferred-green:#4a9456;
-            /* New: 5% lighter shade of accent-green */
-            --accent-green-lighter: hsl(100, 56%, 25%); /* Original HSL: hsl(100, 56%, 20%) */
+            --accent-green-lighter: hsl(100, 56%, 25%); /* 5% lighter shade of accent-green */
         }
+
+        /* Body styling */
         body{
             font-family:'Georgia',serif;
             background-color:var(--bg-primary);
@@ -24,7 +28,11 @@
             line-height:1.6;
             min-height:100vh
         }
+
+        /* Main container for content */
         .container{max-width:800px;margin:0 auto;padding:20px}
+
+        /* Header section styling */
         header{
             text-align:center;
             padding:40px 20px;
@@ -36,6 +44,8 @@
             flex-direction:column;
             align-items:center
         }
+
+        /* Content within the header */
         .header-content{
             display:flex;
             align-items:center;
@@ -45,8 +55,14 @@
             margin-bottom:10px;
             gap:20px
         }
+
+        /* Logo image styling */
         .logo{width:240px;height:240px;flex-shrink:0}
+
+        /* Brand text alignment */
         .brand-text{text-align:left}
+
+        /* "Shake Well" badge styling */
         .shake-badge{
             width:80px;height:80px;
             background-color:var(--accent-green);
@@ -60,12 +76,18 @@
             color:#fff;
             flex-shrink:0
         }
+
+        /* Typography for headings */
         h1{font-size:2.5em;font-weight:400;margin-bottom:5px;letter-spacing:-1px}
         h2{font-size:1.4em;font-weight:400}
         h3{font-size:1.5em;font-weight:400;margin-bottom:15px}
         h4{font-size:1.2em;font-weight:400}
+
+        /* Subtitle and volume text */
         .subtitle{font-style:italic;font-size:1.2em;margin-bottom:10px}
         .volume{font-size:1.1em;text-align:center}
+
+        /* Mission statement and ingredient box styling */
         .mission,.ingredient-box{
             background-color:var(--bg-secondary);
             padding:25px;border-radius:8px;margin-bottom:20px;
@@ -73,12 +95,18 @@
             border:2px solid var(--border-color)
         }
         .ingredient-box{text-align:left;font-style:normal}
+
+        /* Product overview section */
         .product-overview{
             background:#fff;padding:30px;border:2px solid var(--border-color);
             border-radius:8px;margin-bottom:20px
         }
         .product-overview h2{font-size:1.6em;margin-bottom:15px;color:var(--accent-green)}
+
+        /* Accordion container */
         .accordion{margin-bottom:15px}
+
+        /* Accordion header styling */
         .accordion-header{
             background:var(--bg-secondary);padding:20px;
             border:2px solid var(--border-color);border-radius:8px;
@@ -86,20 +114,37 @@
             transition:.3s
         }
         .accordion-header:hover{background:#ddd0b8}
+
+        /* Accordion icon styling */
         .accordion-icon{font-size:1.5em;transition:transform .3s}
+
+        /* Accordion content base styling - hidden by default */
         .accordion-content{
-            display:none;padding:25px;background:#fff;
-            border:2px solid var(--border-color);border-top:none;
-            border-radius:0 0 8px 8px;margin-top:-2px;
-            /* Default max-height for all accordion content */
-            max-height: 500px; /* Adjust as needed for typical content */
-            overflow-y: hidden; /* Hidden by default, changes to auto when active */
+            max-height: 0; /* Controls visibility and enables smooth transition */
+            overflow: hidden; /* Hides content that exceeds max-height */
+            padding: 0 25px; /* Padding for content, will be adjusted when active */
+            background:#fff;
+            border:2px solid var(--border-color);
+            border-top:none;
+            border-radius:0 0 8px 8px;
+            margin-top:-2px;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out; /* Smooth transition for height and padding */
         }
+
+        /* Active accordion state */
         .accordion.active .accordion-icon{transform:rotate(180deg)}
         .accordion.active .accordion-content{
-            display:block;
-            overflow-y: auto; /* Enable scrolling when active */
+            padding: 25px; /* Restore padding when active */
         }
+
+        /* Specific styles for scrollable accordion content (Terms & Essential Oil Info) */
+        .accordion-content.scrollable-content.active {
+            max-height: 600px; /* Increased fixed max height for scrolling content */
+            overflow-y: auto; /* Enable vertical scrolling */
+            padding-right: 15px; /* Add some padding to prevent scrollbar from touching text */
+        }
+
+        /* Payment options layout */
         .payment-options{
             display:flex;justify-content:space-around;gap:30px;text-align:center;
             margin:30px 0;flex-wrap:wrap
@@ -109,11 +154,15 @@
             border:3px solid var(--preferred-green);border-radius:12px;background:#f9fff9;
             max-width:280px;padding-bottom:30px;display:flex;flex-direction:column;align-items:center;gap:10px
         }
+
+        /* QR code images */
         .qr-code{width:200px;height:200px}
         .qr-code-small{width:140px;height:140px}
         .qr-code,.qr-code-small{
             border:2px solid var(--border-color);border-radius:8px;margin:0 auto;display:block
         }
+
+        /* Preferred label for payment method */
         .preferred-label{
             background:var(--preferred-green);color:#fff;padding:5px 10px;border-radius:4px;
             font-size:.9em;margin-bottom:10px;display:inline-block
@@ -121,6 +170,8 @@
         .payment-note{font-size:.9em;color:#666;margin-top:10px;font-style:italic}
         .zelle-tip{font-size:.7em;color:#888;margin-top:5px}
         .payment-header{text-align:center;margin-bottom:25px;font-size:1.2em;font-weight:bold}
+
+        /* Warning box styling */
         .warning-box{
             background:#f8f4e8;border:2px solid #8b6914;padding:20px;margin:20px 0;border-radius:8px
         }
@@ -129,12 +180,16 @@
             text-align:center;line-height:24px;font-weight:bold;font-size:18px;transform:rotate(45deg);
             margin-right:8px;position:relative
         }
-        .hazard-icon::before{content:"!";display:inline-block;transform:rotate(-45deg)}
+        .hazard-icon::before{content:"!";display:inline-inline-block;transform:rotate(-45deg)}
+
+        /* Essential oil info box */
         .oil-info{
             background:#f5f0e8;border-left:4px solid var(--accent-green);
             padding:15px;margin:20px 0
         }
         .oil-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:15px}
+
+        /* Image toggle button within oil info */
         .toggle-wrapper{display:flex;flex-direction:column;align-items:center}
         .image-toggle{
             background:var(--accent-green);color:#fff;border:none;border-radius:50%;
@@ -143,12 +198,16 @@
         }
         .image-toggle:hover{background:#1a3409;transform:scale(1.1)}
         .toggle-label{font-size:10px;margin-top:2px;color:var(--accent-green)}
+
+        /* Image panel for essential oil images */
         .image-panel{max-height:0;overflow:hidden;transition:max-height .4s;margin-bottom:15px}
-        .image-panel.active{max-height:300px}
+        .image-panel.active{max-height:300px} /* Max height for image panel content */
         .plant-image{
             width:240px;height:240px;border-radius:8px;border:2px solid var(--border-color);
             object-fit:cover;display:block;margin:15px auto 0
         }
+
+        /* Footer styling */
         .footer{text-align:center;padding:40px 20px;margin-top:50px;border-top:2px solid var(--border-color)}
         .contact-info{
             margin-top:20px;display:flex;justify-content:center;gap:40px;flex-wrap:wrap
@@ -159,19 +218,26 @@
             text-decoration:none
         }
         .contact-info a:hover{background:#c9b89a}
+
+        /* About section layout */
         .about-section{display:flex;align-items:flex-start;gap:20px}
         .about-image{
             width:280px;height:280px;flex-shrink:0;border-radius:8px;border:2px solid var(--border-color);
             object-fit:cover
         }
         .about-text{flex:1;font-style:italic;font-size:1.1em;line-height:1.8;padding-top:10px}
+
+        /* Product display images */
         .product-display{
             display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:10px
         }
         .product-display img{
             width:200px;height:auto;border:2px solid var(--border-color);border-radius:8px
         }
+
+        /* Cosmetic notice */
         .cosmetic-notice{text-align:center;font-style:italic;color:#666;margin:20px 0;font-size:.9em}
+
         /* Styles for online buy buttons to make them a list */
         .online-buy-buttons > div {
             flex: none !important;
@@ -184,6 +250,7 @@
             display: block !important;
             gap: 0 !important;
         }
+
         /* Review Form Styles */
         .review-form {
             background: var(--bg-secondary);
@@ -269,7 +336,8 @@
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
-        /* New: Disclaimer style */
+
+        /* Disclaimer style */
         .disclaimer {
             font-size: 0.85em; /* Slightly smaller text */
             color: var(--accent-green-lighter); /* 5% lighter green */
@@ -303,14 +371,7 @@
             background: none;
         }
 
-        /* Specific style for Terms of Service accordion content to enable scrolling */
-        .terms-accordion-content {
-            max-height: 400px; /* Set a fixed max height for scrolling */
-            overflow-y: auto; /* Enable vertical scrolling */
-            padding-right: 15px; /* Add some padding to prevent scrollbar from touching text */
-        }
-
-
+        /* Media queries for responsiveness */
         @media(max-width:600px){
             .header-content{flex-direction:column;align-items:center}
             .logo{width:180px;height:180px}
@@ -335,9 +396,9 @@
                 flex-direction: column;
                 gap: 10px;
             }
-            /* Adjust max-height for terms on smaller screens if needed */
-            .terms-accordion-content {
-                max-height: 300px; /* Smaller max-height for mobile */
+            /* Adjust max-height for scrollable content on smaller screens if needed */
+            .accordion-content.scrollable-content.active {
+                max-height: 450px; /* Increased smaller max-height for mobile */
             }
         }
     </style>
@@ -379,7 +440,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Payment Options</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content">
+            <div class="accordion-content static-content">
                 <p class="payment-header">$10 per bottle – quick & easy</p>
                 <div class="online-buy-buttons" style="display:block; margin-top:20px;">
                     <div style="margin-bottom:15px; text-align:center;">
@@ -427,7 +488,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Customer Reviews</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content">
+            <div class="accordion-content scrollable-content">
                 <div class="review-form">
                     <h3>Write a Review</h3>
                     <div id="formMessage"></div>
@@ -464,7 +525,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Product Display</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content">
+            <div class="accordion-content static-content">
                 <div class="product-display">
                     <img src="images/seal-creek-elixir-2oz-bottle-pic.png" alt="Seal Creek™ 2 oz Bottle">
                 </div>
@@ -475,7 +536,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Ingredients (INCI)</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content">
+            <div class="accordion-content static-content">
                 <div class="ingredient-box">
                     <p><strong>Full INCI List:</strong></p>
                     <p>Aqua (Water), Alcohol Denat., Lavandula angustifolia (Lavender) Oil, Mentha piperita (Peppermint) Oil, Corymbia citriodora Oil, Soap, Glycerin, Citrus Aurantium Bergamia (Bergamot) Fruit Oil, Juniperus Virginiana (Cedarwood) Oil, Fragrance (Parfum), Olea Europaea (Olive) Fruit Oil, Aloe Barbadensis Leaf Juice, Citric Acid, Sodium Chloride, Potassium Sorbate, Sodium Benzoate.</p>
@@ -487,7 +548,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Essential Oil Information</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content">
+            <div class="accordion-content scrollable-content">
 
                 <div class="oil-info">
                     <div class="oil-header">
@@ -562,7 +623,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Directions for Use</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content">
+            <div class="accordion-content static-content">
                 <ol>
                     <li><strong>Shake vigorously</strong> until mixture appears uniformly opaque</li>
                     <li><strong>Spray 2–4 pumps</strong> on exposed skin or clothing</li>
@@ -585,7 +646,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>About the Owner</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content">
+            <div class="accordion-content static-content">
                 <div class="about-section">
                     <img src="images/Seal_Creek_ab_me_pic_opt1.png" alt="Owner portrait" class="about-image">
                     <p class="about-text">Seal Creek™ was born from evenings on Nana's porch, where lavender drifted through Texas dusk. Each batch is mixed by hand with lavender, lemon eucalyptus, and peppermint—no heavy additives—bottling porch calm for your pocket.</p>
@@ -597,7 +658,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Safety & Warnings</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content">
+            <div class="accordion-content static-content">
                 <div class="warning-box">
                     <p><strong><span class="hazard-icon"></span>Important Safety Information:</strong></p>
                     <ul>
@@ -620,7 +681,7 @@
             <div class="accordion-header" onclick="toggleAccordion(this)">
                 <h2>Terms of Service & Legal Information</h2><span class="accordion-icon">▼</span>
             </div>
-            <div class="accordion-content terms-accordion-content">
+            <div class="accordion-content scrollable-content">
                 
                 <div class="warning-box">
                     <p><strong><span class="hazard-icon"></span>IMPORTANT LEGAL NOTICE:</strong> By purchasing or using Seal Creek™ Elixirs products, you agree to these Terms of Service. Please read carefully before use.</p>
@@ -775,21 +836,57 @@
     </div>
 
     <script>
-        function toggleAccordion(h){
-            const a=h.parentElement;
-            document.querySelectorAll('.accordion').forEach(acc=>{
-                if(acc!==a)acc.classList.remove('active')
+        // Function to toggle accordion tabs
+        function toggleAccordion(headerElement) {
+            const currentAccordion = headerElement.parentElement; // The .accordion div
+            const content = headerElement.nextElementSibling; // The .accordion-content div
+
+            // Check if the clicked accordion is already active
+            const isActive = currentAccordion.classList.contains('active');
+
+            // Close all other active accordions
+            document.querySelectorAll('.accordion').forEach(accordion => {
+                if (accordion !== currentAccordion && accordion.classList.contains('active')) {
+                    accordion.classList.remove('active');
+                    const otherContent = accordion.querySelector('.accordion-content');
+                    otherContent.style.maxHeight = '0'; // Collapse other content
+                    otherContent.style.overflowY = 'hidden'; // Hide overflow for smooth collapse
+                }
             });
-            a.classList.toggle('active')
+
+            // Toggle the clicked accordion
+            if (isActive) {
+                // If it was active, close it
+                currentAccordion.classList.remove('active');
+                content.style.maxHeight = '0';
+                content.style.overflowY = 'hidden';
+            } else {
+                // If it was not active, open it
+                currentAccordion.classList.add('active');
+                // Determine if content should scroll or fully expand
+                if (content.classList.contains('scrollable-content')) {
+                    content.style.maxHeight = '600px'; // Fixed height for scrolling content (increased from 400px)
+                    content.style.overflowY = 'auto'; // Enable scrolling
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px'; // Expand to full content height
+                    content.style.overflowY = 'hidden'; // No scrolling for static content
+                }
+            }
         }
+
+        // Function to toggle plant images within essential oil info
         function togglePlantImage(btn){
-            const panel=btn.closest('.oil-info').querySelector('.image-panel');
-            const active=panel.classList.contains('active');
-            document.querySelectorAll('.image-panel').forEach(p=>p.classList.remove('active'));
-            document.querySelectorAll('.image-toggle').forEach(b=>b.textContent='▶');
-            if(!active){
+            const panel = btn.closest('.oil-info').querySelector('.image-panel');
+            const active = panel.classList.contains('active');
+            
+            // Close all other image panels and reset their buttons
+            document.querySelectorAll('.image-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.image-toggle').forEach(b => b.textContent = '▶');
+
+            // Toggle the clicked image panel
+            if (!active){
                 panel.classList.add('active');
-                btn.textContent='▼'
+                btn.textContent = '▼';
             }
         }
 
