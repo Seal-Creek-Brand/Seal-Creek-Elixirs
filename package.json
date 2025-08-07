@@ -1,6 +1,8 @@
 {
+  "name": "seal-creek-functions",
+  "version": "1.0.0",
   "dependencies": {
-    "nodemailer": "^6.9.1",
-    "node-fetch": "^3.3.0"
+    "node-fetch": "^3.3.2",
+    "stripe": "^15.0.0"
   }
 }
