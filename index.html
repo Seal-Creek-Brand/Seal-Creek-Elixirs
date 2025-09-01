@@ -443,19 +443,18 @@
                 <h2>Payment Options</h2><span class="accordion-icon">▼</span>
             </div>
             <div class="accordion-content">
-                <p class="payment-header">$10 per bottle – quick & easy</p>
+                <p class="payment-header">$15 per bottle <u>via Stripe</u></p>
                 <div class="online-buy-buttons" style="display:block; margin-top:20px;">
                     <div style="margin-bottom:15px; text-align:center;">
                         <p>Buy a bottle:</p>
-                        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
-                        <stripe-buy-button buy-button-id="buy_btn_1Rpz6v1Xz1RJ20NomN2oxJXv" publishable-key="pk_live_51Rpb0l1Xz1RJ20NoMDHfwcqLfJFhdHrVAfSuMWBIx8JPaEyyBZiz6GFsVpyWflACHDtL2Bd2pufksEg90LB7g20L00xiv7TIU5"></stripe-buy-button>
+                        <a href="https://buy.stripe.com/5kQ28k0136PEenEfo9efC07" target="_blank" style="display: inline-block; background: var(--accent-green); color: white; padding: 12px 24px; border-radius: 5px; text-decoration: none; font-weight: bold;">Buy 1 Bottle</a>
                     </div>
                     
                 <!-- Begin: Custom Quantity Checkout (enhanced, matches green theme) -->
                 <div id="sc-custom-qty" style="margin:20px 0 10px 0; text-align:center;">
                     <p style="margin-bottom:10px;">— or —</p>
-                    <label for="sc-qty" style="display:block; margin-bottom:8px; font-weight:bold;">Select your amount:</label>
-                    <input id="sc-qty" type="number" min="1" value="1"
+                    <label for="sc-qty" style="display:block; margin-bottom:8px; font-weight:bold;">Select your amount (max 30):</label>
+                    <input id="sc-qty" type="number" min="1" max="30" value="1"
                            style="width:120px; text-align:center; padding:10px 12px; border:2px solid var(--accent-green); border-radius:10px; font-size:16px;">
                     <button id="sc-checkout"
                             style="margin-left:10px; padding:10px 18px; border-radius:999px; border:2px solid var(--accent-green); background:var(--accent-green); color:#fff; cursor:pointer; font-size:16px;">
@@ -464,7 +463,8 @@
                     <div id="sc-msg" style="font-size:12px; color:#555; margin-top:8px; display:none;"></div>
                 </div>
                 <!-- End: Custom Quantity Checkout -->
-</div>
+                </div>
+                <p style="text-align: center; font-weight: bold; font-size: 1.2em; margin: 30px 0; color: var(--accent-green);">OR</p>
                 <div class="payment-options">
                     <div class="payment-method">
                         <h3>Venmo</h3>
@@ -537,13 +537,13 @@
                     <div class="image-panel">
                         <img src="images/lavender-plant.png" alt="Lavender Plant" class="plant-image">
                     </div>
-                    <p>The cornerstone of this blend, lavender has been treasured for millennia. Ancient Romans used it in their baths (the name comes from Latin <em>lavare</em> – to wash), while medieval Europeans scattered it on floors to freshen rooms.</p>
+                    <p>The cornerstone of this blend, lavender has been treasured for millennia. Ancient Romans used it in their baths (the name comes from Latin <em>lavare</em> — to wash), while medieval Europeans scattered it on floors to freshen rooms.</p>
                     <p><strong>Interesting Facts:</strong></p>
                     <ul>
                         <li>Queen Victoria demanded fresh lavender in all royal residences</li>
                         <li>During WWI, lavender oil was used in field hospitals</li>
                         <li>≈100 lb of flowers yield 1 lb of oil</li>
-                        <li>Finest lavender grows at 600–1 400 m elevation</li>
+                        <li>Finest lavender grows at 600—1 400 m elevation</li>
                     </ul>
                 </div>
 
@@ -558,7 +558,7 @@
                     <div class="image-panel">
                         <img src="images/peppermint-plant.png" alt="Peppermint Plant" class="plant-image">
                     </div>
-                    <p>Peppermint's crisp, cooling aroma has delighted humanity for &gt;4 000 years. Greeks mythologized the nymph Minthe, Romans used mint wreaths during feasts, and Egyptian medical papyri list mint varieties.</p>
+                    <p>Peppermint's crisp, cooling aroma has delighted humanity for >4 000 years. Greeks mythologized the nymph Minthe, Romans used mint wreaths during feasts, and Egyptian medical papyri list mint varieties.</p>
                     <p><strong>Interesting Facts:</strong></p>
                     <ul>
                         <li>Natural hybrid of spearmint + water mint</li>
@@ -615,7 +615,7 @@
                 <h3>Directions for Use</h3>
                 <ol>
                     <li><strong>Shake vigorously</strong> until mixture appears uniformly opaque</li>
-                    <li><strong>Spray 2–4 pumps</strong> on exposed skin or clothing</li>
+                    <li><strong>Spray 2—4 pumps</strong> on exposed skin or clothing</li>
                     <li><strong>Spread evenly</strong> with hands for maximum coverage</li>
                     <li><strong>Best performance</strong> on natural fibers</li>
                     <li><strong>Non‑staining formula</strong></li>
@@ -635,7 +635,7 @@
                 <div class="warning-box">
                     <p><strong><span class="hazard-icon"></span>Important Safety Information:</strong></p>
                     <ul>
-                        <li><strong>Flammable</strong> – keep away from flames</li>
+                        <li><strong>Flammable</strong> — keep away from flames</li>
                         <li><strong>External use only</strong></li>
                         <li><strong>Avoid eyes</strong>; may cause irritation</li>
                         <li><strong>May irritate</strong> sensitive/broken skin</li>
