@@ -37,7 +37,8 @@ exports.handler = async function(event) {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [{
-        price: process.env.STRIPE_PRICE_ID,
+        // --- THIS IS THE ONLY LINE THAT HAS BEEN CHANGED ---
+        price: process.env.STRIPE_VAR_QUANTITY_PRICE_ID, 
         quantity: numQuantity,
       }],
       mode: 'payment',
