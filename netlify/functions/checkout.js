@@ -1,61 +1,68 @@
-// This is the code for your file at: netlify/functions/checkout.js
+// FINAL VERSION: /netlify/functions/checkout.js
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-exports.handler = async (event) => {
-  // Only allow POST requests
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
-  }
+// This is the main function that Netlify will run
+exports.handler = async function(event) {
+  
+  // ---> PERMISSION HEADERS START <---
+  // These headers give your GitHub page permission to talk to this function
+  const headers = {
+    'Access-Control-Allow-Origin': '*', // Allows any domain to request
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS' // Allow POST and the OPTIONS pre-flight request
+  };
 
+  // Browsers send a pre-flight "OPTIONS" request to ask for permission first.
+  // This part of the code handles that by responding with a "200 OK" and the headers.
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers,
+      body: 'This was a preflight request'
+    };
+  }
+  // ---> PERMISSION HEADERS END <---
+
+
+  // The rest of your function logic
   try {
     const { quantity } = JSON.parse(event.body);
 
-    // Validate the quantity
-    const numQuantity = parseInt(quantity, 10);
-    if (isNaN(numQuantity) || numQuantity < 1 || numQuantity > 30) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: 'Invalid quantity.' }),
-      };
+    const numQuantity = Number(quantity);
+    if (!Number.isInteger(numQuantity) || numQuantity < 1 || numQuantity > 100) {
+      throw new Error("Invalid quantity specified.");
     }
-
-    // Create the Stripe Checkout session
+    
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      billing_address_collection: 'required',
-      shipping_address_collection: {
-        allowed_countries: ['US'], // Adjust allowed countries as needed
-      },
+      line_items: [{
+        price: process.env.STRIPE_PRICE_ID,
+        quantity: numQuantity,
+      }],
       mode: 'payment',
-      
-      line_items: [
-        {
-          // Your Price ID has been added here
-          price: 'price_1S2cPM1Xz1RJ20NoiXV3ecKB', 
-          quantity: numQuantity, // Use the quantity from the user's request
-        },
-      ],
-      
-      // 🚨 Remember to replace these with your actual URLs
-      success_url: `https://your-website.com/success`, 
-      cancel_url: `https://your-website.com/`, // You can link back to the main page
+      success_url: `https://sealcreekelixirs.com/success.html`,
+      cancel_url: `https://sealcreekelixirs.com`, 
     });
 
-    // Return the session URL to the frontend
+    // We must return the headers with the final response as well
     return {
       statusCode: 200,
-      body: JSON.stringify({ url: session.url }),
-      headers: {
-        'Access-Control-Allow-Origin': '*', // Allows your website to call this function
-      },
+      headers, 
+      body: JSON.stringify({
+        url: session.url
+      }),
     };
 
   } catch (error) {
-    console.error('Stripe error:', error);
+    console.error("Stripe Checkout Error:", error);
+    // And also with any error response
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Failed to create checkout session.' }),
+      headers,
+      body: JSON.stringify({
+        error: "Sorry, we couldn't create a checkout session."
+      }),
     };
   }
 };
